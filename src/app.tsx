@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import Index from './pages/home/app'
+import Home from './pages/home/app'
 
 import './app.scss'
 
@@ -35,23 +35,33 @@ class App extends Component {
       list: [
         {
           text: '实时疫情',
-          pagePath: 'pages/home/app'
+          pagePath: 'pages/home/app',
+          iconPath: 'asset/img/pneumonia-icon.png',
+          selectedIconPath: 'asset/img/actived-pneumonia-icon.png'
         },
         {
           text: '疫情地图',
-          pagePath: 'pages/map/app'
+          pagePath: 'pages/map/app',
+          iconPath: 'asset/img/map-icon.png',
+          selectedIconPath: 'asset/img/actived-map-icon.png'
         },
         {
           text: '辟除谣言',
-          pagePath: 'pages/refuter/app'
+          pagePath: 'pages/refuter/app',
+          iconPath: 'asset/img/refuter-icon.png',
+          selectedIconPath: 'asset/img/actived-refuter-icon.png'
         },
         {
           text: '定点医院',
-          pagePath: 'pages/hospital/app'
+          pagePath: 'pages/hospital/app',
+          iconPath: 'asset/img/hospital-icon.png',
+          selectedIconPath: 'asset/img/actived-hospital-icon.png'
         },
         {
           text: '预防指南',
-          pagePath: 'pages/guide/app'
+          pagePath: 'pages/guide/app',
+          iconPath: 'asset/img/guide-icon.png',
+          selectedIconPath: 'asset/img/actived-guide-icon.png'
         }
       ]
     }
@@ -61,7 +71,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Home />
     )
   }
 }
