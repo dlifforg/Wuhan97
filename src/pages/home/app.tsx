@@ -3,7 +3,6 @@ import { View, Text } from '@tarojs/components'
 import './app.scss'
 
 export default class Index extends Component {
-
   componentWillMount () { }
 
   componentDidMount () { }
