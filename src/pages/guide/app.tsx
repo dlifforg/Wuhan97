@@ -1,26 +1,14 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
+
 import './app.scss'
 
-export default class Index extends Component {
-
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
+export default class Guide extends Component {
   config: Config = {
-    navigationBarTitleText: '预防指南'
+    navigationBarTitleText: '预防指南',
   }
 
-  render () {
-    return (
-      <View className='guide'></View>
-    )
+  render() {
+    return <View className='guide'></View>
   }
 }

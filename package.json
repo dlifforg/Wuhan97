@@ -50,7 +50,7 @@
     "@tarojs/webpack-runner": "2.0.2",
     "@types/react": "^16.4.6",
     "@types/webpack-env": "^1.13.6",
-    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
     "@typescript-eslint/parser": "^2.13.0",
     "babel-eslint": "^8.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -59,14 +59,35 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-config-taro": "2.0.2",
     "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-react-hooks": "^1.6.1",
     "eslint-plugin-taro": "2.0.2",
+    "husky": "^4.2.1",
+    "lint-staged": "^10.0.2",
+    "prettier": "^1.19.1",
     "stylelint": "9.3.0",
     "stylelint-config-taro-rn": "2.0.2",
     "stylelint-taro-rn": "2.0.2",
     "typescript": "^3.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{css,scss}": [
+      "prettier --write",
+      "git add"
+    ],
+    "{src,config}/**/*.{js,jsx,mjs,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix --ext .js,.jsx,.mjs,.ts,.tsx",
+      "git add"
+    ]
   }
 }
