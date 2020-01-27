@@ -16,3 +16,6 @@ declare const process: {
     [key: string]: any;
   }
 }
+
+// @ts-ignore
+declare const wx: any
