@@ -1,0 +1,131 @@
+@keyframes ripple {
+  20% {
+    box-shadow: 0 0 0 2px #b4c4f1;
+  }
+
+  50% {
+    box-shadow: 0 0 0 2px #b4c4f1, 0 0 0 4px #b4c4f1;
+  }
+
+  100% {
+    box-shadow: 0 0 0 2px #b4c4f1, 0 0 0 4px #b4c4f1, 0 0 0 8px #b4c4f1;
+  }
+}
+
+.card {
+  display: flex;
+
+  &-time {
+    position: relative;
+    right: 64px;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    &-relative {
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    &-precision {
+      color: #999;
+      font-size: 20px;
+    }
+
+    &-line {
+      position: absolute;
+      top: 0;
+      right: 34px;
+      bottom: 0;
+      width: 4px;
+      background-color: #ebebeb;
+    }
+
+    &-circle {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      right: 24px;
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-color: #446ddf;
+      border-radius: 50%;
+      box-sizing: border-box;
+      border: 4px solid #b4c4f1;
+    }
+
+    &-wrapper {
+      flex: 0;
+      position: relative;
+      width: 200px;
+      min-width: 200px;
+    }
+  }
+
+  &-text {
+    padding: 18px 24px;
+    background-color: #fff;
+    border-radius: 8px;
+
+    &-wrapper {
+      flex: 1;
+      padding-bottom: 24px;
+    }
+
+    &-top {
+      line-height: 1.2;
+      color: #333;
+      font-size: 32px;
+      font-weight: 600;
+
+      &-prefix {
+        position: relative;
+        top: 2px;
+        margin-right: 12px;
+        display: inline-block;
+        padding: 0 4px;
+        height: 32px;
+        line-height: 32px;
+        color: #fff;
+        font-size: 24px;
+        vertical-align: top;
+        background-color: #f74c31;
+        border-radius: 4px;
+      }
+
+      &-wrapper {
+        overflow: hidden;
+        display: -webkit-box;
+        max-height: 76px;
+        font-size: 0;
+        word-break: break-all;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+      }
+    }
+
+    &-middle {
+      margin-top: 8px;
+      overflow: hidden;
+      display: -webkit-box;
+      line-height: 32px;
+      color: #999;
+      font-size: 24px;
+      word-break: break-all;
+      -webkit-line-clamp: 5;
+      text-overflow: ellipsis;
+    }
+
+    &-bottom {
+      margin-top: 8px;
+      color: #999;
+      font-size: 24px;
+      text-align: right;
+    }
+  }
+
+  &-animation {
+    animation: ripple 2s 0.2s infinite;
+  }
+}

@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View, Text, ScrollView } from '@tarojs/components'
 import { Card } from '../components/card'
 
 import './app.scss'
@@ -16,9 +16,11 @@ export default class Home extends Component {
           <Text className='home-title'>实时疫情</Text>
           <Text className='home-title-prefix'></Text>
         </View>
-        <View className='home-content'>
-          <Card />
-        </View>
+        <ScrollView className='home-content' scroll-y>
+          <View className='home-content-inner'>
+            <Card />
+          </View>
+        </ScrollView>
       </View>
     )
   }
