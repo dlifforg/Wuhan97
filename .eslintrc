@@ -16,10 +16,10 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "useJSXTextNode": true,
-    "project": "./tsconfig.json"
+    "useJSXTextNode": true
   },
   "rules": {
+    "@typescript-eslint/no-var-requires": 0,
     "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
   },
