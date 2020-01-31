@@ -17,7 +17,7 @@ export default class Card extends Component<ICardProps> {
       isLatest = false,
     } = this.props
     const hasSource = !!source
-    const precisionTime = dayjs(timestamp).format('M-D h:m')
+    const precisionTime = dayjs(timestamp).format('M-D H:m')
 
     return (
       <View className='card'>

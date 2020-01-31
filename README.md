@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-``` bash
+```bash
 # 使用淘宝镜像
 npm config set registry https://registry.npm.taobao.org -g
 npm config set disturl https://npm.taobao.org/dist -g
@@ -22,7 +22,7 @@ node -v
 
 ## Build Setup
 
-``` bash
+```bash
 # 初始化项目
 git clone git@github.com:dlifforg/Wuhan97.git
 cd Wuhan97

@@ -40,7 +40,7 @@ const fetchWrapper = (
   config = {},
   isShowToast = true,
 ) => {
-  return async (cb: Function, query = {}, ...replacers: string[]) => {
+  return async (cb?: Function, query = {}, ...replacers: string[]) => {
     // hide former loading before showing a new loading
     wx.hideLoading({
       complete() {
