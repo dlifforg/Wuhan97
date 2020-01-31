@@ -1,10 +1,10 @@
 export default class UtilityTool {
-  static wait(time) {
+  static wait(time: number) {
     return new Promise(resolve => window.setTimeout(resolve, time))
   }
 
-  static toWxAPIPromisify(func) {
-    return (option, ...rest) => {
+  static toWxAPIPromisify(func: Function) {
+    return (option: object, ...rest: any[]) => {
       return new Promise((resolve, reject) => {
         func(
           Object.assign({}, option, { success: resolve, fail: reject }),
@@ -14,11 +14,11 @@ export default class UtilityTool {
     }
   }
 
-  static throttle(func, threshold = 160) {
+  static throttle(func: Function, threshold = 160) {
     let id: number
     let startTime = new Date().getTime()
 
-    return function(...args) {
+    return function(...args: any[]) {
       const currentTime = new Date().getTime()
 
       clearTimeout(id)

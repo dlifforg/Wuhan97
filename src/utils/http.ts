@@ -1,20 +1,5 @@
 import Tool from './tool'
-
-interface IData {
-  error?: any
-  code: number
-  data: object
-  errmsg?: string
-  message: string
-  result?: object
-  status?: number
-}
-interface IError {
-  errMsg?: string
-}
-interface IResponse {
-  data?: object
-}
+import { IResponse, IResponseData, IResponseError } from '../base/interfaces'
 
 const success = (response: IResponse) => {
   let { data = {} } = response
@@ -37,7 +22,7 @@ const success = (response: IResponse) => {
     data: realData,
     message: nativeMessage,
     errmsg: mockErrorMessage,
-  } = data as IData
+  } = data as IResponseData
 
   if (!status && realData !== null) return realData || result
   if (mockErrorMessage || nativeMessage || error.message)
@@ -47,7 +32,7 @@ const success = (response: IResponse) => {
 
   return realData
 }
-const fail = (error: IError) => {
+const fail = (error: IResponseError) => {
   throw error.errMsg || error
 }
 

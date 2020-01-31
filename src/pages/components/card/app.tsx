@@ -2,19 +2,11 @@ import dayjs from 'dayjs'
 import classNames from 'classnames'
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
+import { ICardProps } from '../../../base/interfaces'
 
 import './app.scss'
 
-interface IProps {
-  title: string
-  content: string
-  timestamp: number
-  isLatest?: boolean
-  relativeTime: string
-  source?: string | undefined
-}
-
-export default class Card extends Component<IProps> {
+export default class Card extends Component<ICardProps> {
   render() {
     const {
       title,
