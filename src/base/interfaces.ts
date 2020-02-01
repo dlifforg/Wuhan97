@@ -2,6 +2,14 @@ export interface IResponse {
   data?: object
 }
 
+export interface IPneumonia {
+  title: string
+  pubDate: number
+  summary: string
+  infoSource: string
+  pubDateStr: string
+}
+
 export interface ICardProps {
   title: string
   content: string
@@ -23,4 +31,11 @@ export interface IResponseData {
 
 export interface IResponseError {
   errMsg?: string
+}
+
+export interface IHomeState {
+  page: number
+  isFailed: boolean
+  isFetchAllData: boolean
+  pneumoniaList: IPneumonia[]
 }

@@ -44,7 +44,7 @@ const fetchWrapper = (
     // hide former loading before showing a new loading
     wx.hideLoading({
       complete() {
-        return wx.showLoading({ title: 'Loading' })
+        return wx.showLoading({ title: '载入中...' })
       },
     })
 
