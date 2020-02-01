@@ -13,6 +13,7 @@ export interface IPneumonia {
 export interface ICardProps {
   title: string
   content: string
+  isLast?: boolean
   timestamp: number
   isLatest?: boolean
   relativeTime: string

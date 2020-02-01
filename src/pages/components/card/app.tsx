@@ -14,6 +14,7 @@ export default class Card extends Component<ICardProps> {
       content,
       timestamp,
       relativeTime,
+      isLast = false,
       isLatest = false,
     } = this.props
     const hasSource = !!source
@@ -27,11 +28,12 @@ export default class Card extends Component<ICardProps> {
             <Text className='card-time-precision'>{precisionTime}</Text>
           </View>
           <Text
-            className={classNames('card-time-circle', {
+            className={classNames('card-time-top-circle', {
               'card-animation': isLatest,
             })}
           ></Text>
           <Text className='card-time-line'></Text>
+          {isLast && <Text className='card-time-bottom-circle'></Text>}
         </View>
         <View className='card-text-wrapper'>
           <View className='card-text'>
