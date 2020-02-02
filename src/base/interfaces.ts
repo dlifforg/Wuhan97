@@ -1,5 +1,5 @@
 export interface IResponse {
-  data?: object
+  data?: object | undefined
 }
 
 export interface IPneumonia {
@@ -13,30 +13,38 @@ export interface IPneumonia {
 export interface ICardProps {
   title: string
   content: string
-  isLast?: boolean
   timestamp: number
-  isLatest?: boolean
   relativeTime: string
   source?: string | undefined
+  isLast?: boolean | undefined
+  isLatest?: boolean | undefined
 }
 
 export interface IResponseData {
   error?: any
-  code: number
   data: object
-  errmsg?: string
   message: string
-  result?: object
-  status?: number
+  code: number | string
+  errmsg?: string | undefined
+  result?: object | undefined
+  status?: number | undefined
+  success?: boolean | undefined
 }
 
 export interface IResponseError {
-  errMsg?: string
+  errMsg?: string | undefined
 }
 
-export interface IHomeState {
+interface IBaseListState {
   page: number
   isFailed: boolean
   isFetchAllData: boolean
+}
+
+export interface IHomeState extends IBaseListState {
   pneumoniaList: IPneumonia[]
+}
+
+export interface IListState extends IBaseListState {
+  [index: string]: any
 }

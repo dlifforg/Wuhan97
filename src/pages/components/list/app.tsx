@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import * as api from '../../base/api'
-import { IResponseError } from '../../../base/interfaces'
+import { IListState, IResponseError } from '../../../base/interfaces'
 
 export default class List extends Component {
   static get defaultProps() {
@@ -15,7 +15,7 @@ export default class List extends Component {
 
   fetchMethodFieldName = 'fetchList'
 
-  state = {
+  state: IListState = {
     ...List.defaultProps,
     [this.listFieldName]: [],
   }
@@ -37,14 +37,22 @@ export default class List extends Component {
     return filterFields.reduce(reduceCallback, {})
   }
 
+  onPullDownRefresh() {
+    this.fetchList()
+    wx.stopPullDownRefresh()
+  }
+
   reachBottomEventHandler() {
     const { page, isFailed, isFetchAllData } = this.state
     if (isFetchAllData) return
 
-    const callback = isFailed
-      ? undefined
-      : () => this.fetchFilteredList(this.filterMapCreator(), this.state.page)
-    return this.setState({ page: page + 1 }, callback)
+    if (isFailed) {
+      return this.fetchFilteredListWrapper(page)
+    }
+
+    return this.setState({ page: page + 1 }, () =>
+      this.fetchFilteredListWrapper(this.state.page),
+    )
   }
 
   fetchList(page = 1, limit = 10) {
@@ -70,20 +78,21 @@ export default class List extends Component {
     }
   }
 
-  resetter(page = 1, isFetch = true) {
-    const { page: lastPage } = this.state
-
-    this.setState({ page, [this.listFieldName]: [], isFetchAllData: false })
-
-    // 强制拉数据
-    if (lastPage === page && isFetch)
-      this.fetchFilteredList(this.filterMapCreator(), page)
+  resetter(page = 1) {
+    this.setState(
+      { page, [this.listFieldName]: [], isFetchAllData: false },
+      () => this.fetchFilteredListWrapper(this.state.page),
+    )
   }
 
   updateListCallback(list: object[]) {
     const { [this.listFieldName]: realList = [] } = this.state
 
     return this.setState({ [this.listFieldName]: [...realList, ...list] })
+  }
+
+  fetchFilteredListWrapper(page: number) {
+    this.fetchFilteredList(this.filterMapCreator(), page)
   }
 
   pullDownRefreshEventHandler(isForce = true) {
@@ -94,7 +103,7 @@ export default class List extends Component {
   }
 
   fetchFilteredList(filterMap: object, page: number, limit = 10) {
-    const query = { page, limit, ...filterMap }
+    const query = { page, size: limit, ...filterMap }
 
     api[this.fetchMethodFieldName](this.fetchListCallback(limit), query)
   }

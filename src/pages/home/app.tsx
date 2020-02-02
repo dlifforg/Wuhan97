@@ -20,6 +20,10 @@ export default class Home extends List {
     pneumoniaList: [],
   }
 
+  reachTopEventHandler = () => {
+    this.pullDownRefreshEventHandler()
+  }
+
   render() {
     const { pneumoniaList } = this.state
 
@@ -32,8 +36,8 @@ export default class Home extends List {
         <ScrollView
           scroll-y
           className='home-content'
+          onScrollToUpper={this.reachTopEventHandler}
           onScrollToLower={this.reachBottomEventHandler}
-          onScrollToUpper={() => this.pullDownRefreshEventHandler()}
         >
           <View className='home-content-inner'>
             {pneumoniaList.map((pneumonia, index, list) => (

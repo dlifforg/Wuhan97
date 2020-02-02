@@ -8,27 +8,23 @@ const success = (response: IResponse) => {
       data = JSON.parse(data)
     } catch ({ message }) {
       data = {
-        code: 1,
         message,
+        code: 'fail',
       }
     }
   }
 
   const {
-    code,
     status,
     result,
-    error = {},
     data: realData,
     message: nativeMessage,
     errmsg: mockErrorMessage,
+    success: isSuccess = true,
   } = data as IResponseData
 
-  if (!status && realData !== null) return realData || result
-  if (mockErrorMessage || nativeMessage || error.message)
-    throw mockErrorMessage ||
-      nativeMessage ||
-      `${error.message}-${code || error.code}`
+  if (!status && realData !== null && isSuccess) return realData || result
+  if (mockErrorMessage || nativeMessage) throw mockErrorMessage || nativeMessage
 
   return realData
 }
