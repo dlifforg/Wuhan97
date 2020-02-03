@@ -1,9 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import * as echarts from './echarts'
-import EcCanvas from './ec-canvas'
-import geoJson from '../../pages/Map/china.geo.json'
+import { EcCanvas } from './components'
+
+import * as echarts from './lib/echarts'
+import geoJson from './json/china.geo.json'
 
 import './app.scss'
 
@@ -17,11 +18,13 @@ class Echart extends Component {
   }
 
   initChart() {
-    echarts.registerMap('china', geoJson);
+    echarts.registerMap('china', geoJson)
+
     const { option } = this.props
     if (option && option.tooltip) {
       console.warn('option 中包含 tooltip 更新 option 会出现 hide error')
     }
+
     let chart
     switch (process.env.TARO_ENV) {
       case 'h5':
@@ -45,53 +48,60 @@ class Echart extends Component {
         break
     }
   }
+
   componentDidMount() {
     const { lazyLoad = false, disableTouch = true } = this.props.ec || {}
+
     this.setState({ defaultEc: { lazyLoad, disableTouch } })
-    !lazyLoad && this.initChart()
-  }
-  componentWillReceiveProps(nextProps) {
-    const { prevOption } = this.state
-    if (prevOption !== nextProps.option) {
-      if (this.chart) {
-        try {
-          this.chart.dispose()
-        } catch (e) {
-          console.error('[Custom Error] dispose hide error.')
-        }
-      }
-      this.setState({
-        prevOption: Object.assign({}, nextProps.option),
-      })
+    if (!lazyLoad) {
       this.initChart()
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { prevOption } = this.state
+    if (prevOption === nextProps.option) return
+
+    if (this.chart) {
+      try {
+        this.chart.dispose()
+      } catch (e) {
+        console.error('[Custom Error] dispose hide error.')
+      }
+    }
+
+    this.setState({ prevOption: Object.assign({}, nextProps.option) })
+    this.initChart()
+  }
+
   render() {
     const { defaultEc: ec } = this.state
+
     if (process.env.TARO_ENV === 'weapp') {
       return (
         <View style={`${this.props.style || 'height: 200px'}`}>
           <EcCanvas
+            ec={ec}
+            echarts={echarts}
+            canvasId='mychart-area'
             ref={ecComp => {
               this.ecComp = ecComp
             }}
-            canvasId='mychart-area'
-            ec={ec}
-            echarts={echarts}
           />
         </View>
       )
     } else if (process.env.TARO_ENV === 'h5') {
       return (
         <View
-          style={`${this.props.style || 'height: 200px'}`}
+          id='chart-area'
           ref={echartsRef => {
             this.ec = echartsRef
           }}
-          id='chart-area'
+          style={`${this.props.style || 'height: 200px'}`}
         />
       )
     }
+
     return <View></View>
   }
 }

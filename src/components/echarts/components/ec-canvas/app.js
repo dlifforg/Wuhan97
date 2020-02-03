@@ -3,7 +3,7 @@ import { Canvas } from '@tarojs/components'
 
 import WxCanvas from './wx-canvas'
 
-import './ec-canvas.scss'
+import './app.scss'
 
 function wrapTouch(event) {
   for (let i = 0; i < event.touches.length; ++i) {
