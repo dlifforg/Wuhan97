@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 
 import * as echarts from './echarts'
 import EcCanvas from './ec-canvas'
+import geoJson from '../../pages/Map/china.geo.json'
 
 import './app.scss'
 
@@ -16,6 +17,7 @@ class Echart extends Component {
   }
 
   initChart() {
+    echarts.registerMap('china', geoJson);
     const { option } = this.props
     if (option && option.tooltip) {
       console.warn('option 中包含 tooltip 更新 option 会出现 hide error')
