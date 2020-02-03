@@ -1,5 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+
 import { Echart } from '../../components/echarts'
 
 import './app.scss'
@@ -12,8 +13,8 @@ const option = {
     {
       type: 'piecewise',
       pieces: [
-        { min: 10000, color: '#7f1100' }, 
-        { min: 1000, max: 9999, color: '#bd1317' }, 
+        { min: 10000, color: '#7f1100' },
+        { min: 1000, max: 9999, color: '#bd1317' },
         { min: 500, max: 999, color: '#e74a45' },
         { min: 100, max: 499, color: '#ff8b71' },
         { min: 10, max: 99, color: '#fdd2a0' },
@@ -23,8 +24,8 @@ const option = {
         color: '#000',
         fontSize: 8,
       },
-      itemGap: 2
-    }
+      itemGap: 2,
+    },
   ],
   toolbox: {
     show: true,
@@ -47,7 +48,7 @@ const option = {
         normal: {
           show: true,
           fontSize: 8,
-          distance: 5
+          distance: 5,
         },
         emphasis: {
           textStyle: {

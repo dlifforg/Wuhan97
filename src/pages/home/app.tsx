@@ -1,7 +1,9 @@
 import Taro, { Config } from '@tarojs/taro'
 import { View, Text, ScrollView } from '@tarojs/components'
-import { Card } from '../components/card'
+
 import { List } from '../components/list'
+import { HomeCard } from '../components/home-card'
+
 import { IHomeState } from '../../base/interfaces'
 
 import './app.scss'
@@ -41,7 +43,7 @@ export default class Home extends List {
         >
           <View className='home-content-inner'>
             {pneumoniaList.map((pneumonia, index, list) => (
-              <Card
+              <HomeCard
                 key={index + 1}
                 isLatest={index < 1}
                 title={pneumonia.title}

@@ -8,7 +8,7 @@ class App extends Component {
     pages: [
       'pages/home/app',
       'pages/map/app',
-      'pages/refuter/app',
+      'pages/rumor/app',
       'pages/hospital/app',
       'pages/guide/app',
     ],
@@ -39,9 +39,9 @@ class App extends Component {
         },
         {
           text: '辟除谣言',
-          pagePath: 'pages/refuter/app',
-          iconPath: 'asset/img/refuter-icon.png',
-          selectedIconPath: 'asset/img/actived-refuter-icon.png',
+          pagePath: 'pages/rumor/app',
+          iconPath: 'asset/img/rumor-icon.png',
+          selectedIconPath: 'asset/img/actived-rumor-icon.png',
         },
         {
           text: '定点医院',

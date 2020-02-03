@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 export default class WxCanvas {
   constructor(ctx, canvasId) {
     this.ctx = ctx

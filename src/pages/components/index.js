@@ -1,2 +1,2 @@
-export { Card } from './card'
 export { List } from './list'
+export { HomeCard } from './home-card'
