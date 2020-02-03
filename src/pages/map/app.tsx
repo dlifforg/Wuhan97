@@ -5,10 +5,9 @@ import { Echart } from '../../components/echarts'
 import './app.scss'
 
 const option = {
-  // tooltip: {
-  //   // trigger: 'item',
-  // },
-
+  tooltip: {
+    trigger: 'item',
+  },
   visualMap: [
     {
       type: 'piecewise',
@@ -63,7 +62,7 @@ const option = {
           areaColor: '#fff',
         },
         emphasis: {
-          areaColor: '#a9a9a9',
+          areaColor: '#000',
           borderWidth: 0,
         },
       },
@@ -76,6 +75,7 @@ const option = {
         { name: '湖南', value: 521 },
         { name: '安徽', value: 408 },
         { name: '江西', value: 391 },
+        { name: '重庆', value: 312 },
         { name: '江苏', value: 271 },
         { name: '四川', value: 254 },
         { name: '山东', value: 246 },
