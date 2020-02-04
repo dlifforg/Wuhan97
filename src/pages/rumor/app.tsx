@@ -1,24 +1,50 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components'
+import Taro, { Config } from '@tarojs/taro'
+
+import { List } from '../components/list'
+import { BasePage } from '../components/base-page'
+import { RumorCard } from '../components/rumor-card'
+
+import { IRumorState } from '../../base/interfaces'
 
 import './app.scss'
 
-export default class Rumor extends Component {
+export default class Rumor extends List {
+  listFieldName = 'rumorList'
+
+  fetchMethodFieldName = 'fetchRumorList'
+
   config: Config = {
     navigationBarTitleText: '辟除谣言',
   }
 
+  state: IRumorState = {
+    ...Rumor.defaultProps,
+    rumorList: [],
+  }
+
   render() {
+    const { rumorList } = this.state
+
     return (
-      <View className='rumor'>
-        <View className='rumor-title-wrapper'>
-          <Text className='rumor-title'>辟除谣言</Text>
-          <Text className='rumor-title-prefix'></Text>
-        </View>
-        <ScrollView scroll-y className='rumor-content'>
-          <View className='rumor-content-inner'></View>
-        </ScrollView>
-      </View>
+      <BasePage
+        title='辟除谣言'
+        className='rumor'
+        onScrollToUpper={this.reachTopEventHandler}
+        onScrollToLower={this.reachBottomEventHandler}
+      >
+        {rumorList.map((rumor, index, list) => (
+          <RumorCard
+            key={index + 1}
+            body={rumor.body}
+            index={index + 1}
+            rumorId={rumor.id}
+            title={rumor.title}
+            rumorType={rumor.rumorType}
+            mainSummary={rumor.mainSummary}
+            isLast={index + 1 === list.length}
+          />
+        ))}
+      </BasePage>
     )
   }
 }

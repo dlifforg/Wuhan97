@@ -1,6 +1,6 @@
 export default class UtilityTool {
   static wait(time: number) {
-    return new Promise(resolve => window.setTimeout(resolve, time))
+    return new Promise(resolve => setTimeout(resolve, time))
   }
 
   static toWxAPIPromisify(func: Function) {
@@ -26,7 +26,7 @@ export default class UtilityTool {
         func.apply(this, args)
         startTime = currentTime
       } else {
-        id = window.setTimeout(() => func.apply(this, args), threshold)
+        id = setTimeout(() => func.apply(this, args), threshold)
       }
     }
   }

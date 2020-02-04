@@ -1,3 +1,9 @@
+interface IBaseListState {
+  page: number
+  isFailed: boolean
+  isFetchAllData: boolean
+}
+
 export interface IResponse {
   data?: object | undefined
 }
@@ -8,16 +14,6 @@ export interface IPneumonia {
   summary: string
   infoSource: string
   pubDateStr: string
-}
-
-export interface ICardProps {
-  title: string
-  content: string
-  timestamp: number
-  relativeTime: string
-  source?: string | undefined
-  isLast?: boolean | undefined
-  isLatest?: boolean | undefined
 }
 
 export interface IResponseData {
@@ -31,14 +27,41 @@ export interface IResponseData {
   success?: boolean | undefined
 }
 
+export interface IBasePageProps {
+  children: any
+  title: string
+  className: string
+  onScrollToLower(event: any): any
+  onScrollToUpper(event: any): any
+}
+
+export interface IHomeCardProps {
+  title: string
+  content: string
+  timestamp: number
+  relativeTime: string
+  source?: string | undefined
+  isLast?: boolean | undefined
+  isLatest?: boolean | undefined
+}
+
 export interface IResponseError {
   errMsg?: string | undefined
 }
 
-interface IBaseListState {
-  page: number
-  isFailed: boolean
-  isFetchAllData: boolean
+export interface IRumorCardProps {
+  key?: number
+  body: string
+  index: number
+  title: string
+  isLast: boolean
+  rumorId: number
+  rumorType: number
+  mainSummary: string
+}
+
+export interface IRumorCardState {
+  isToggled: boolean
 }
 
 export interface IHomeState extends IBaseListState {
@@ -47,4 +70,8 @@ export interface IHomeState extends IBaseListState {
 
 export interface IListState extends IBaseListState {
   [index: string]: any
+}
+
+export interface IRumorState extends IBaseListState {
+  rumorList: any[]
 }

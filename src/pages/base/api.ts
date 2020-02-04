@@ -69,6 +69,7 @@ const wxFetchWrapper = (method: string, isShowToast = true) => {
   }
 }
 
+export const fetchRumorList = fetchWrapper(`${BASE_URL}/rumor/list`)
 export const fetchPneumoniaList = fetchWrapper(`${BASE_URL}/pneumonia/list`)
 
 // built-in wx api

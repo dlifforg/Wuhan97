@@ -1,7 +1,7 @@
 import Taro, { Config } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components'
 
 import { List } from '../components/list'
+import { BasePage } from '../components/base-page'
 import { HomeCard } from '../components/home-card'
 
 import { IHomeState } from '../../base/interfaces'
@@ -22,41 +22,29 @@ export default class Home extends List {
     pneumoniaList: [],
   }
 
-  reachTopEventHandler = () => {
-    this.pullDownRefreshEventHandler()
-  }
-
   render() {
     const { pneumoniaList } = this.state
 
     return (
-      <View className='home'>
-        <View className='home-title-wrapper'>
-          <Text className='home-title'>实时疫情</Text>
-          <Text className='home-title-prefix'></Text>
-        </View>
-        <ScrollView
-          scroll-y
-          className='home-content'
-          onScrollToUpper={this.reachTopEventHandler}
-          onScrollToLower={this.reachBottomEventHandler}
-        >
-          <View className='home-content-inner'>
-            {pneumoniaList.map((pneumonia, index, list) => (
-              <HomeCard
-                key={index + 1}
-                isLatest={index < 1}
-                title={pneumonia.title}
-                content={pneumonia.summary}
-                source={pneumonia.infoSource}
-                timestamp={pneumonia.pubDate}
-                isLast={index + 1 === list.length}
-                relativeTime={pneumonia.pubDateStr}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+      <BasePage
+        title='实时疫情'
+        className='home'
+        onScrollToUpper={this.reachTopEventHandler}
+        onScrollToLower={this.reachBottomEventHandler}
+      >
+        {pneumoniaList.map((pneumonia, index, list) => (
+          <HomeCard
+            key={index + 1}
+            isLatest={index < 1}
+            title={pneumonia.title}
+            content={pneumonia.summary}
+            source={pneumonia.infoSource}
+            timestamp={pneumonia.pubDate}
+            isLast={index + 1 === list.length}
+            relativeTime={pneumonia.pubDateStr}
+          />
+        ))}
+      </BasePage>
     )
   }
 }

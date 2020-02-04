@@ -50,7 +50,11 @@ export default class List extends Component {
     wx.stopPullDownRefresh()
   }
 
-  reachBottomEventHandler() {
+  reachTopEventHandler = () => {
+    this.pullDownRefreshEventHandler()
+  }
+
+  reachBottomEventHandler = () => {
     const { page, isFailed, isFetchAllData } = this.state
     if (isFetchAllData) return
 

@@ -1,4 +1,5 @@
 import Tool from './tool'
+import { timeout } from '../base/constants'
 import { IResponse, IResponseData, IResponseError } from '../base/interfaces'
 
 const success = (response: IResponse) => {
@@ -38,12 +39,17 @@ const request = (method: string, url: string, query: object, config = {}) => {
     return { ...object, [key]: value }
   }, {})
 
-  return Tool.toWxAPIPromisify(wx.request)({
-    url,
-    data,
-    method,
-    ...config,
-  }).then(success, fail)
+  return Promise.race([
+    Tool.toWxAPIPromisify(wx.request)({
+      url,
+      data,
+      method,
+      ...config,
+    }).then(success, fail),
+    Tool.wait(timeout).then(() => {
+      throw new Error('请求超时')
+    }),
+  ])
 }
 const uploadFile = (url: string, option: object, rest: object) => {
   return Tool.toWxAPIPromisify(wx.uploadFile)({
