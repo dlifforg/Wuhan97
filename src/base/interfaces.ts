@@ -16,6 +16,26 @@ export interface IPneumonia {
   pubDateStr: string
 }
 
+interface IAreaProps {
+  confirmed: number
+  suspected: number
+  cured: number
+  dead: number
+}
+
+// interface ICityProps extends IAreaProps {
+//   cityName: string
+// }
+
+// export interface IMapProps extends IAreaProps {
+//   provinceName: string
+//   cities: ICityProps[]
+//   comment: string
+// }
+interface IMapProps extends IAreaProps {
+  name: string
+}
+
 export interface IResponseData {
   error?: any
   data: object
@@ -74,4 +94,8 @@ export interface IListState extends IBaseListState {
 
 export interface IRumorState extends IBaseListState {
   rumorList: any[]
+}
+
+export interface IPneumoniaMapState extends IBaseListState {
+  mapList: IMapProps[]
 }

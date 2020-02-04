@@ -1,0 +1,70 @@
+.map {
+    &-title {
+        font-size: 36px;
+        font-weight: 500;
+
+        &-wrapper {
+            position: relative; 
+            height: 100px;
+            line-height: 100px;
+            padding: 0 70px;
+            font-size: 0;
+            background-color: #fff;
+        }
+
+        &-prefix {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            width: 8px;
+            height: 40px;
+            background-color: #4169e2;
+            transform: translateY(-50%);
+        }
+    }
+
+    &-case {
+        &-nav {
+            background-color: #fff;
+            font-size: 24px;
+            height: 84px;
+            line-height: 84px;
+            color: #222;
+            text-align: center;
+            padding: 0 40px;
+            position: relative;
+            
+            &-area {
+                width: 147px;
+                height: 100%;
+                float: left;
+                text-align: left;
+                font-weight: 400;
+                overflow: hidden;
+                color: #005dff;
+            }
+            
+            &-confirmed {
+                color: #005dff;
+            }
+
+            &-format{
+                width: 128px;
+                height: 100%;
+                overflow: hidden;
+                float: left;
+            }
+        }
+    }
+}
+
+.clearfix{
+    &::after{
+        content: '.';
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+}

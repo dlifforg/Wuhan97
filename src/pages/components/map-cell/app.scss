@@ -1,0 +1,60 @@
+.cell {
+    height: 84px;
+    line-height: 84px;
+    font-size: 28px;
+    color: #222;
+    text-align: center;
+    padding: 0 40px;
+    background-color: #f8f8f8;
+    position: relative;
+
+    &::before{
+        content: '.';
+        display: block;
+        position: absolute;
+        font-size: 0;
+        line-height: 0;
+        width: 0;
+        height: 0;
+        border-width: 8px 8px 0 8px;
+        border-style: solid;
+        border-color: #737373 transparent transparent transparent;
+        right: 30px;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    &-format{
+        width: 128px;
+        height: 100%;
+        overflow: hidden;
+        float: left;
+    }
+
+    &-name {
+        font-size: 30px;
+        color: #005dff;
+        width: 147px;
+        height: 100%;
+        float: left;
+        text-align: left;
+        font-weight: 400;
+        overflow: hidden;
+    }
+
+    &-confirmed {
+        color: #005dff;
+        font-weight: 400;
+    }
+}
+
+.clearfix{
+    &::after{
+        content: '.';
+        display: block;
+        font-size: 0;
+        line-height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+}
