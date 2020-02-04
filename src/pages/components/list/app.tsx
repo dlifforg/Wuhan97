@@ -38,6 +38,13 @@ export default class List extends Component {
     return filterFields.reduce(reduceCallback, {})
   }
 
+  resetter(page = 1) {
+    this.setState(
+      { page, [this.listFieldName]: [], isFetchAllData: false },
+      () => this.fetchFilteredListWrapper(this.state.page),
+    )
+  }
+
   onPullDownRefresh() {
     this.fetchList()
     wx.stopPullDownRefresh()
@@ -77,13 +84,6 @@ export default class List extends Component {
 
       return this.updateListCallback(list)
     }
-  }
-
-  resetter(page = 1) {
-    this.setState(
-      { page, [this.listFieldName]: [], isFetchAllData: false },
-      () => this.fetchFilteredListWrapper(this.state.page),
-    )
   }
 
   updateListCallback(list: object[]) {
