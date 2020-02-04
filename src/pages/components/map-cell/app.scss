@@ -1,27 +1,36 @@
 .cell {
     height: 84px;
     line-height: 84px;
-    font-size: 28px;
     color: #222;
     text-align: center;
     padding: 0 40px;
-    background-color: #f8f8f8;
+    font-size: 25px; 
+    background-color:#fff;
     position: relative;
-
-    &::before{
-        content: '.';
+    display: none;
+    
+    &-show {
         display: block;
-        position: absolute;
-        font-size: 0;
-        line-height: 0;
-        width: 0;
-        height: 0;
-        border-width: 8px 8px 0 8px;
-        border-style: solid;
-        border-color: #737373 transparent transparent transparent;
-        right: 30px;
-        top: 50%;
-        transform: translate(0, -50%);
+    }
+
+    &-province {
+        background-color: #f8f8f8;
+        font-size: 30px;
+        &::before{
+            content: '.';
+            display: block;
+            position: absolute;
+            font-size: 0;
+            line-height: 0;
+            width: 0;
+            height: 0;
+            border-width: 8px 8px 0 8px;
+            border-style: solid;
+            border-color: #737373 transparent transparent transparent;
+            right: 30px;
+            top: 50%;
+            transform: translate(0, -50%);
+        }
     }
 
     &-format{
@@ -32,8 +41,6 @@
     }
 
     &-name {
-        font-size: 30px;
-        color: #005dff;
         width: 147px;
         height: 100%;
         float: left;
@@ -43,8 +50,10 @@
     }
 
     &-confirmed {
-        color: #005dff;
-        font-weight: 400;
+        color: #e10000;
+    }
+    &-cured {
+        color: #31ac76;
     }
 }
 

@@ -129,6 +129,9 @@ export default class PneumoniaMap extends Component {
   // state: IPneumoniaMapState = {
   //   mapList: [],
   // }
+  clickEventHandler = (index) => {
+    // mapList[++index].
+  };
 
   render() {
     return (
@@ -146,23 +149,40 @@ export default class PneumoniaMap extends Component {
             <Text className='map-case-title-warning'>（数据如有滞后请谅解）</Text>
            </View>
            <View className='map-case-nav'>
-            <Text className='map-case-nav-area'>地区</Text>
+            <Text className='map-case-nav-name'>地区</Text>
             <Text className='map-case-nav-format map-case-nav-confirmed'>确诊</Text>
             <Text className='map-case-nav-format'>疑似</Text>
-            <Text className='map-case-nav-format'>治愈</Text>
+            <Text className='map-case-nav-format map-case-nav-cured'>治愈</Text>
             <Text className='map-case-nav-format'>死亡</Text>
            </View>
            <View className='map-case-table'>
             {mapList.map((provinceCase, index) => (
+              <View onClick={() => this.clickEventHandler(index)}>
               <MapCell
+                isShow={true}
                 key={index + 1}
+                isProvince={true}
                 dead={provinceCase.dead}
                 cured={provinceCase.cured}
                 confirmed={provinceCase.confirmed}
                 suspected={provinceCase.suspected}
                 name={provinceCase.provinceShortName}
-             />
-             ))}
+              />
+              
+              {provinceCase.cities.map((cityCase, indexCity) => (
+                <MapCell
+                  isShow={false}
+                  isProvince={false}
+                  key={indexCity + 1}
+                  dead={cityCase.dead}
+                  cured={cityCase.cured}
+                  confirmed={cityCase.confirmed}
+                  suspected={cityCase.suspected}
+                  name={cityCase.cityName}
+                />               
+              ))}
+             </View>
+             )}
            </View>
         </View>
       </View>   
