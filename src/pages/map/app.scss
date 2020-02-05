@@ -1,76 +1,49 @@
 .map {
-  &-title {
-    font-size: 36px;
-    font-weight: 500;
-
-    &-wrapper {
-      position: relative;
-      height: 100px;
-      line-height: 100px;
-      padding: 0 70px;
-      font-size: 0;
-      background-color: #fff;
-    }
-
-    &-prefix {
-      position: absolute;
-      top: 50%;
-      left: 40px;
-      width: 8px;
-      height: 40px;
-      background-color: #4169e2;
-      transform: translateY(-50%);
-    }
-  }
-
   &-case {
-    padding-top: 150px;
+    padding-top: 48px;
     font: 36px/80px -apple-system-font, system-ui, -apple-system, Segoe UI,
       Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue,
       PingFang SC, Hiragino Sans GB, Microsoft YaHei UI, Microsoft YaHei, Arial;
 
     &-title {
       position: relative;
-      margin-top: -30px;
-      padding-left: 32px;
+      display: flex;
+      align-items: center;
+      height: 80px;
 
       &::before {
         content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
         width: 16px;
         height: 16px;
         background-color: #e10000;
-        position: absolute;
-        left: 0;
-        top: 32px;
       }
 
       &-info {
-        position: relative;
-        margin-top: -30px;
         padding-left: 32px;
       }
 
       &-warning {
-        font-size: 20px;
+        margin-left: 0;
         color: #737373;
-        margin-left: 10px;
-        font-weight: normal;
-        position: relative;
-        top: -2px;
+        font-size: 20px;
       }
     }
 
     &-nav {
-      height: 70px;
-      position: relative;
+      display: flex;
+      padding-left: 40px;
+      padding-right: 40px;
 
       &-name {
         display: inline-block;
-        width: 170px;
+        width: 147px;
+        min-width: 147px;
         height: 80px;
         overflow: hidden;
-        vertical-align: top;
-        padding-left: 32px;
       }
 
       &-confirmed {
@@ -82,13 +55,19 @@
       }
 
       &-format {
+        flex: 1;
+        overflow: hidden;
         display: inline-block;
         width: 134px;
         height: 80px;
-        overflow: hidden;
-        vertical-align: top;
+        text-align: center;
       }
     }
+  }
+
+  &-body {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 

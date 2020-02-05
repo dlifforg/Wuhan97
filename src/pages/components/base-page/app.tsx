@@ -1,5 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
+
+import { Title } from '../title'
 
 import { IBasePageProps } from '../../../base/interfaces'
 
@@ -17,10 +19,7 @@ export default class BasePage extends Component<IBasePageProps> {
 
     return (
       <View className={className}>
-        <View className={`${className}-title-wrapper`}>
-          <Text className={`${className}-title`}>{title}</Text>
-          <Text className={`${className}-title-prefix`}></Text>
-        </View>
+        <Title className={className} title={title} />
         <ScrollView
           scroll-y
           className={`${className}-content`}

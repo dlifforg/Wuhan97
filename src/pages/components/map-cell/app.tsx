@@ -13,6 +13,7 @@ export default class MapCell extends Component<IAreaProps> {
       dead,
       name,
       cured,
+      isEven,
       isShow,
       isActive,
       confirmed,
@@ -26,9 +27,9 @@ export default class MapCell extends Component<IAreaProps> {
       <View
         className={classNames(
           'cell',
-          'clearfix',
           { 'cell-hide': !isShow },
           { 'cell-province': isProvince && !isActive },
+          { 'cell-province-even': isProvince && isEven },
           { 'cell-province-active': isProvince && isActive },
         )}
       >

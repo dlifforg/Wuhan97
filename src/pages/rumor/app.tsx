@@ -37,7 +37,6 @@ export default class Rumor extends List {
             key={index + 1}
             body={rumor.body}
             index={index + 1}
-            rumorId={rumor.id}
             title={rumor.title}
             rumorType={rumor.rumorType}
             mainSummary={rumor.mainSummary}

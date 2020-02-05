@@ -1,29 +1,4 @@
 @mixin base-page-mixin {
-  &-title {
-    font-size: 36px;
-    font-weight: 500;
-
-    &-wrapper {
-      position: relative;
-      height: 100px;
-      line-height: 100px;
-      padding: 0 70px;
-      font-size: 0;
-      background-color: #fff;
-      border-bottom: 1px solid #f8f8f8;
-    }
-
-    &-prefix {
-      position: absolute;
-      top: 50%;
-      left: 40px;
-      width: 8px;
-      height: 40px;
-      background-color: #4169e2;
-      transform: translateY(-50%);
-    }
-  }
-
   &-content {
     height: calc(100vh - 100rpx);
 

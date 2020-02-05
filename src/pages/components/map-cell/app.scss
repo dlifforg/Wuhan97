@@ -13,6 +13,7 @@
 }
 
 .cell {
+  display: flex;
   height: 84px;
   line-height: 84px;
   color: #222;
@@ -21,20 +22,22 @@
   font-size: 25px;
   background-color: #fff;
   position: relative;
-  // display: none;
 
   &-hide {
     display: none;
   }
 
   &-province {
-    background-color: #f8f8f8;
     font-size: 30px;
 
     &::before {
       @extend %base-triangle;
       border-width: 8px 8px 0 8px;
       border-color: #737373 transparent transparent transparent;
+    }
+
+    &-even {
+      background-color: #f8f8f8;
     }
 
     &-active {
@@ -50,18 +53,17 @@
   }
 
   &-format {
+    flex: 1;
     width: 128px;
     height: 100%;
     overflow: hidden;
-    float: left;
   }
 
   &-name {
     width: 147px;
+    min-width: 147px;
     height: 100%;
-    float: left;
     text-align: left;
-    font-weight: 400;
     overflow: hidden;
   }
 
@@ -71,16 +73,5 @@
 
   &-cured {
     color: #31ac76;
-  }
-}
-
-.clearfix {
-  &::after {
-    content: '.';
-    display: block;
-    font-size: 0;
-    line-height: 0;
-    visibility: hidden;
-    clear: both;
   }
 }

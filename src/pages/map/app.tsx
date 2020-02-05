@@ -1,8 +1,9 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 
-import { Echart } from '../../components/echarts'
+import { Title } from '../components/title'
 import { MapCell } from '../components/map-cell'
+import { Echart } from '../../components/echarts'
 
 import MapList from './mapList.json'
 import { IPneumoniaMapState } from '../../base/interfaces'
@@ -79,9 +80,7 @@ const currentMapList = MapList.listByArea.map(
 )
 
 const option = {
-  tooltip: {
-    trigger: 'item',
-  },
+  backgroundColor: '#f8f8f8',
   visualMap: [
     {
       type: 'piecewise',
@@ -100,23 +99,12 @@ const option = {
       itemGap: 2,
     },
   ],
-  toolbox: {
-    show: false,
-    orient: 'vertical',
-    left: 'right',
-    top: 'center',
-    itemSize: 10,
-    feature: {
-      dataView: { readOnly: false },
-      restore: {},
-      saveAsImage: {},
-    },
-  },
   series: [
     {
       type: 'map',
       map: 'china',
       mapType: 'map',
+      zoom: 1.2,
       label: {
         normal: {
           show: true,
@@ -177,60 +165,62 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
 
     return (
       <View className='map'>
-        <View className='map-title-wrapper'>
-          <Text className='map-title'>疫情地图</Text>
-          <Text className='map-title-prefix'></Text>
-        </View>
-        <View className='map-china'>
-          <Echart option={option} style='height: 566rpx' />
-        </View>
-        <View className='map-case'>
-          <View className='map-case-title'>
-            <Text className='map-case-title-info'>国内病例</Text>
-            <Text className='map-case-title-warning'>
-              （数据如有滞后请谅解）
-            </Text>
+        <Title className='map' title='疫情地图' />
+        <View className='map-body'>
+          <View className='map-china'>
+            <Echart option={option} style='height: 718rpx' />
           </View>
-          <View className='map-case-nav'>
-            <Text className='map-case-nav-name'>地区</Text>
-            <Text className='map-case-nav-format map-case-nav-confirmed'>
-              确诊
-            </Text>
-            <Text className='map-case-nav-format'>疑似</Text>
-            <Text className='map-case-nav-format map-case-nav-cured'>治愈</Text>
-            <Text className='map-case-nav-format'>死亡</Text>
-          </View>
-          <View className='map-case-table'>
-            {mapList.map((provinceCase, index) => (
-              <View
-                key={index + 1}
-                onClick={() => this.clickEventHandler(index)}
-              >
-                <MapCell
-                  dead={provinceCase.dead}
-                  name={provinceCase.name}
-                  cured={provinceCase.cured}
-                  isShow={provinceCase.isShow}
-                  isActive={provinceCase.isActive}
-                  confirmed={provinceCase.confirmed}
-                  suspected={provinceCase.suspected}
-                  isProvince={provinceCase.isProvince}
-                />
-                {provinceCase.isActive &&
-                  provinceCase.cities.map((cityCase, indexCity) => (
-                    <MapCell
-                      key={indexCity + 1}
-                      dead={cityCase.dead}
-                      name={cityCase.name}
-                      cured={cityCase.cured}
-                      isShow={cityCase.isShow}
-                      confirmed={cityCase.confirmed}
-                      suspected={cityCase.suspected}
-                      isProvince={cityCase.isProvince}
-                    />
-                  ))}
-              </View>
-            ))}
+          <View className='map-case'>
+            <View className='map-case-title'>
+              <Text className='map-case-title-info'>国内病例</Text>
+              <Text className='map-case-title-warning'>
+                （数据如有滞后请谅解）
+              </Text>
+            </View>
+            <View className='map-case-nav'>
+              <Text className='map-case-nav-name'>地区</Text>
+              <Text className='map-case-nav-format map-case-nav-confirmed'>
+                确诊
+              </Text>
+              <Text className='map-case-nav-format'>疑似</Text>
+              <Text className='map-case-nav-format map-case-nav-cured'>
+                治愈
+              </Text>
+              <Text className='map-case-nav-format'>死亡</Text>
+            </View>
+            <View className='map-case-table'>
+              {mapList.map((provinceCase, index) => (
+                <View
+                  key={index + 1}
+                  onClick={() => this.clickEventHandler(index)}
+                >
+                  <MapCell
+                    isEven={index % 2 === 0}
+                    dead={provinceCase.dead}
+                    name={provinceCase.name}
+                    cured={provinceCase.cured}
+                    isShow={provinceCase.isShow}
+                    isActive={provinceCase.isActive}
+                    confirmed={provinceCase.confirmed}
+                    suspected={provinceCase.suspected}
+                    isProvince={provinceCase.isProvince}
+                  />
+                  {provinceCase.isActive &&
+                    provinceCase.cities.map((cityCase, indexCity) => (
+                      <MapCell
+                        key={indexCity + 1}
+                        dead={cityCase.dead}
+                        name={cityCase.name}
+                        cured={cityCase.cured}
+                        isShow={cityCase.isShow}
+                        confirmed={cityCase.confirmed}
+                        suspected={cityCase.suspected}
+                        isProvince={cityCase.isProvince}
+                      />
+                    ))}
+                </View>
+              ))}
+            </View>
           </View>
         </View>
       </View>

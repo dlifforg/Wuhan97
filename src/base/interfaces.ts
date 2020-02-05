@@ -8,12 +8,29 @@ export interface IResponse {
   data?: object | undefined
 }
 
+export interface IAreaProps {
+  dead: number
+  name: string
+  cured: number
+  isEven?: boolean
+  isShow?: boolean
+  confirmed: number
+  suspected: number
+  isActive?: boolean
+  isProvince?: boolean
+}
+
 export interface IPneumonia {
   title: string
   pubDate: number
   summary: string
   infoSource: string
   pubDateStr: string
+}
+
+export interface ITitleProps {
+  title: string
+  className: string
 }
 
 // interface ICityProps extends IAreaProps {
@@ -25,23 +42,10 @@ export interface IPneumonia {
 //   cities: ICityProps[]
 //   comment: string
 // }
-export interface IAreaProps {
-  name: string
-  confirmed: number
-  suspected: number
-  cured: number
-  dead: number
-  isShow?: boolean
-  isActive?: boolean
-  isProvince?: boolean
-}
+
 // export interface IAreaState {
 //   isActiveProvince: boolean
 // }
-
-interface IMapProps extends IAreaProps{
-  cities: IAreaProps[]
-}
 
 export interface IResponseData {
   error?: any
@@ -52,14 +56,6 @@ export interface IResponseData {
   result?: object | undefined
   status?: number | undefined
   success?: boolean | undefined
-}
-
-export interface IBasePageProps {
-  children: any
-  title: string
-  className: string
-  onScrollToLower(event: any): any
-  onScrollToUpper(event: any): any
 }
 
 export interface IHomeCardProps {
@@ -82,13 +78,21 @@ export interface IRumorCardProps {
   index: number
   title: string
   isLast: boolean
-  rumorId: number
+  rumorId?: number
   rumorType: number
   mainSummary: string
 }
 
 export interface IRumorCardState {
   isToggled: boolean
+}
+
+interface IMapProps extends IAreaProps {
+  cities: IAreaProps[]
+}
+
+export interface IPneumoniaMapState {
+  mapList: IMapProps[]
 }
 
 export interface IHomeState extends IBaseListState {
@@ -99,10 +103,12 @@ export interface IListState extends IBaseListState {
   [index: string]: any
 }
 
-export interface IRumorState extends IBaseListState {
-  rumorList: any[]
+export interface IBasePageProps extends ITitleProps {
+  children: any
+  onScrollToLower(event: any): any
+  onScrollToUpper(event: any): any
 }
 
-export interface IPneumoniaMapState {
-  mapList: IMapProps[]
+export interface IRumorState extends IBaseListState {
+  rumorList: IRumorCardProps[]
 }
