@@ -1,11 +1,11 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text, ScrollView } from '@tarojs/components' 
+import { View, Text } from '@tarojs/components'
 
 import { Echart } from '../../components/echarts'
-
 import { MapCell } from '../components/map-cell'
+
 import MapList from './mapList.json'
-// import { IPneumoniaMapState } from '../../base/interfaces'
+import { IPneumoniaMapState } from '../../base/interfaces'
 
 import './app.scss'
 
@@ -45,9 +45,38 @@ const mapData = [
   { name: '澳门', value: 8 },
   { name: '西藏', value: 1 },
   { name: '南海诸岛', value: 0 },
-];
+]
 
-const mapList = MapList.listByArea;
+const currentMapList = MapList.listByArea.map(
+  ({
+    cities,
+    provinceName,
+    dead: provinceDead,
+    cured: provinceCured,
+    confirmed: provinceConfirmed,
+    suspected: provinceSuspected,
+  }) => ({
+    isShow: true,
+    isActive: false,
+    isProvince: true,
+    dead: provinceDead,
+    name: provinceName,
+    cured: provinceCured,
+    confirmed: provinceConfirmed,
+    suspected: provinceSuspected,
+    cities: cities.map(
+      ({ cityName: name, confirmed, suspected, cured, dead }) => ({
+        dead,
+        name,
+        cured,
+        confirmed,
+        suspected,
+        isShow: false,
+        isProvince: false,
+      }),
+    ),
+  }),
+)
 
 const option = {
   tooltip: {
@@ -72,7 +101,7 @@ const option = {
     },
   ],
   toolbox: {
-    show: true,
+    show: false,
     orient: 'vertical',
     left: 'right',
     top: 'center',
@@ -113,27 +142,39 @@ const option = {
       },
       animation: false,
       data: mapData,
-    }
-  ]
+    },
+  ],
 }
 
-export default class PneumoniaMap extends Component {
+export default class PneumoniaMap extends Component<IPneumoniaMapState> {
   listFieldName = 'mapList'
 
   // fetchMethodFieldName = 'fetchMapList'
-  
+
   config: Config = {
     navigationBarTitleText: '疫情地图',
   }
 
-  // state: IPneumoniaMapState = {
-  //   mapList: [],
-  // }
-  clickEventHandler = (index) => {
-    // mapList[++index].
-  };
+  state: IPneumoniaMapState = {
+    mapList: currentMapList,
+  }
+
+  clickEventHandler = (index: number) => {
+    const { mapList } = this.state
+    const newMapList = JSON.parse(JSON.stringify(mapList))
+
+    const currentListItem = newMapList[index]
+    currentListItem.isActive = !currentListItem.isActive
+    currentListItem.cities = currentListItem.cities.map(
+      ({ isShow, ...rest }) => ({ ...rest, isShow: !isShow }),
+    )
+
+    this.setState({ mapList: newMapList })
+  }
 
   render() {
+    const { mapList } = this.state
+
     return (
       <View className='map'>
         <View className='map-title-wrapper'>
@@ -146,46 +187,53 @@ export default class PneumoniaMap extends Component {
         <View className='map-case'>
           <View className='map-case-title'>
             <Text className='map-case-title-info'>国内病例</Text>
-            <Text className='map-case-title-warning'>（数据如有滞后请谅解）</Text>
-           </View>
-           <View className='map-case-nav'>
+            <Text className='map-case-title-warning'>
+              （数据如有滞后请谅解）
+            </Text>
+          </View>
+          <View className='map-case-nav'>
             <Text className='map-case-nav-name'>地区</Text>
-            <Text className='map-case-nav-format map-case-nav-confirmed'>确诊</Text>
+            <Text className='map-case-nav-format map-case-nav-confirmed'>
+              确诊
+            </Text>
             <Text className='map-case-nav-format'>疑似</Text>
             <Text className='map-case-nav-format map-case-nav-cured'>治愈</Text>
             <Text className='map-case-nav-format'>死亡</Text>
-           </View>
-           <View className='map-case-table'>
+          </View>
+          <View className='map-case-table'>
             {mapList.map((provinceCase, index) => (
-              <View onClick={() => this.clickEventHandler(index)}>
-              <MapCell
-                isShow={true}
+              <View
                 key={index + 1}
-                isProvince={true}
-                dead={provinceCase.dead}
-                cured={provinceCase.cured}
-                confirmed={provinceCase.confirmed}
-                suspected={provinceCase.suspected}
-                name={provinceCase.provinceShortName}
-              />
-              
-              {provinceCase.cities.map((cityCase, indexCity) => (
+                onClick={() => this.clickEventHandler(index)}
+              >
                 <MapCell
-                  isShow={false}
-                  isProvince={false}
-                  key={indexCity + 1}
-                  dead={cityCase.dead}
-                  cured={cityCase.cured}
-                  confirmed={cityCase.confirmed}
-                  suspected={cityCase.suspected}
-                  name={cityCase.cityName}
-                />               
-              ))}
-             </View>
-             )}
-           </View>
+                  dead={provinceCase.dead}
+                  name={provinceCase.name}
+                  cured={provinceCase.cured}
+                  isShow={provinceCase.isShow}
+                  isActive={provinceCase.isActive}
+                  confirmed={provinceCase.confirmed}
+                  suspected={provinceCase.suspected}
+                  isProvince={provinceCase.isProvince}
+                />
+                {provinceCase.isActive &&
+                  provinceCase.cities.map((cityCase, indexCity) => (
+                    <MapCell
+                      key={indexCity + 1}
+                      dead={cityCase.dead}
+                      name={cityCase.name}
+                      cured={cityCase.cured}
+                      isShow={cityCase.isShow}
+                      confirmed={cityCase.confirmed}
+                      suspected={cityCase.suspected}
+                      isProvince={cityCase.isProvince}
+                    />
+                  ))}
+              </View>
+            ))}
+          </View>
         </View>
-      </View>   
+      </View>
     )
   }
 }
