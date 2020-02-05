@@ -182,7 +182,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
           <Text className='map-title-prefix'></Text>
         </View>
         <View className='map-china'>
-          <Echart option={option} />
+          <Echart option={option} style='height: 566rpx' />
         </View>
         <View className='map-case'>
           <View className='map-case-title'>

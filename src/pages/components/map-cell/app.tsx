@@ -1,6 +1,7 @@
+import classNames from 'classnames'
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
-import classNames from 'classnames'
+
 import { IAreaProps } from '../../../base/interfaces'
 
 import './app.scss'

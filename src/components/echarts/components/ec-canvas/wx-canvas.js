@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default class WxCanvas {
-  constructor(ctx, canvasId) {
+  constructor(ctx, canvasNode, canvasId) {
     this.ctx = ctx
     this.canvasId = canvasId
     this.chart = null
+    this.canvasNode = canvasNode
 
-    this._initStyle(ctx)
     this._initEvent()
   }
 
@@ -61,7 +61,7 @@ export default class WxCanvas {
             (style !== 'fillStyle' && style !== 'strokeStyle') ||
             (value !== 'none' && value !== null)
           ) {
-            ctx['set' + style.charAt(0).toUpperCase() + style.slice(1)](value)
+            ctx[style](value)
           }
         },
       })
@@ -102,5 +102,21 @@ export default class WxCanvas {
         })
       }
     })
+  }
+
+  set width(w) {
+    this.canvasNode.width = w
+  }
+
+  set height(h) {
+    this.canvasNode.height = h
+  }
+
+  get width() {
+    return this.canvasNode.width
+  }
+
+  get height() {
+    return this.canvasNode.height
   }
 }

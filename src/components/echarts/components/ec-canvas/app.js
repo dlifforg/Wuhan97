@@ -14,7 +14,7 @@ function wrapTouch(event) {
   return event
 }
 
-let ctx, echarts
+let echarts
 
 export default class EcCanvas extends Component {
   init = callback => {
@@ -32,23 +32,28 @@ export default class EcCanvas extends Component {
       return
     }
 
-    ctx = Taro.createCanvasContext(this.props.canvasId, this)
-
-    const canvas = new WxCanvas(ctx, this.props.canvasId)
-
-    echarts.setCanvasCreator(() => {
-      return canvas
-    })
-
     const query = Taro.createSelectorQuery().in(this.$scope)
     query
       .select('.ec-canvas')
-      .boundingClientRect(res => {
+      .fields({ node: true, size: true })
+      .exec(res => {
+        const canvasNode = res[0].node
+
+        const canvasDpr = wx.getSystemInfoSync().pixelRatio
+        const canvasWidth = res[0].width
+        const canvasHeight = res[0].height
+
+        const ctx = canvasNode.getContext('2d')
+
+        const canvas = new WxCanvas(ctx, canvasNode, this.props.canvasId)
+        echarts.setCanvasCreator(() => {
+          return canvas
+        })
+
         if (typeof callback === 'function') {
-          this.chart = callback(canvas, res.width, res.height)
+          this.chart = callback(canvas, canvasWidth, canvasHeight, canvasDpr)
         }
       })
-      .exec()
   }
 
   onTouchStart(e) {
@@ -103,24 +108,26 @@ export default class EcCanvas extends Component {
     const { ec = {}, canvasId } = this.props
     return ec.disableTouch ? (
       <Canvas
+        type='2d'
+        init={this.init}
         class='ec-canvas'
         canvas-id={canvasId}
-        init={this.init}
         ref={ecComp => {
           this.ecComp = ecComp
         }}
       />
     ) : (
       <Canvas
+        type='2d'
+        init={this.init}
         class='ec-canvas'
         canvas-id={canvasId}
-        init={this.init}
-        onTouchstart={this.onTouchStart}
-        onTouchmove={this.onTouchMove}
-        onTouchend={this.onTouchEnd}
         ref={ecComp => {
           this.ecComp = ecComp
         }}
+        onTouchend={this.onTouchEnd}
+        onTouchmove={this.onTouchMove}
+        onTouchstart={this.onTouchStart}
       />
     )
   }

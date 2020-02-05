@@ -39,6 +39,7 @@ class Echart extends Component {
           chart = echarts.init(canvas, null, {
             width: width,
             height: height,
+            devicePixelRatio: wx.getSystemInfoSync().pixelRatio,
           })
           canvas.setChart(chart)
           chart.setOption(option)
@@ -84,7 +85,7 @@ class Echart extends Component {
           <EcCanvas
             ec={ec}
             echarts={echarts}
-            canvasId='mychart-area'
+            canvasId='chart-area'
             ref={ecComp => {
               this.ecComp = ecComp
             }}
