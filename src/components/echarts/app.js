@@ -3,6 +3,7 @@ import { View } from '@tarojs/components'
 
 import { EcCanvas } from './components'
 
+import Tool from '../../utils/tool'
 import * as echarts from './lib/echarts'
 import geoJson from './json/china.geo.json'
 
@@ -60,9 +61,9 @@ class Echart extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { prevOption } = this.state
-    if (prevOption === nextProps.option) return
+    if (Tool.isEqual(prevOption, nextProps.option)) return
 
-    if (this.chart) {
+    if (Object.keys(prevOption).length && this.chart) {
       try {
         this.chart.dispose()
       } catch (e) {

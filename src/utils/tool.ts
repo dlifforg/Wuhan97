@@ -14,6 +14,10 @@ export default class UtilityTool {
     }
   }
 
+  static isEqual(first: object, last: object) {
+    return JSON.stringify(first) === JSON.stringify(last)
+  }
+
   static throttle(func: Function, threshold = 160) {
     let id: number
     let startTime = new Date().getTime()
