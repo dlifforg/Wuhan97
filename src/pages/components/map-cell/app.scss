@@ -18,7 +18,7 @@
   line-height: 84px;
   color: #222;
   text-align: center;
-  padding: 0 40px;
+  padding-right: 40px;
   font-size: 25px;
   background-color: #fff;
   position: relative;
@@ -54,17 +54,20 @@
 
   &-format {
     flex: 1;
+    overflow: hidden;
     width: 128px;
     height: 100%;
-    overflow: hidden;
   }
 
   &-name {
-    width: 147px;
-    min-width: 147px;
-    height: 100%;
-    text-align: left;
     overflow: hidden;
+    width: 187px;
+    min-width: 187px;
+    max-width: 187px;
+    height: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
   }
 
   &-confirmed {

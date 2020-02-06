@@ -35,15 +35,15 @@
 
     &-nav {
       display: flex;
-      padding-left: 40px;
       padding-right: 40px;
 
       &-name {
-        display: inline-block;
-        width: 147px;
-        min-width: 147px;
-        height: 80px;
         overflow: hidden;
+        display: inline-block;
+        width: 187px;
+        min-width: 187px;
+        height: 80px;
+        text-align: center;
       }
 
       &-confirmed {
