@@ -70,10 +70,10 @@ class Echart extends Component {
       } catch (e) {
         console.error('[Custom Error] dispose hide error.')
       }
+      this.initChart()
     }
 
     this.setState({ prevOption: Object.assign({}, nextProps.option) })
-    this.initChart()
   }
 
   render() {
