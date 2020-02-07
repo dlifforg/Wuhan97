@@ -1,15 +1,32 @@
 {
-  "extends": ["taro"],
-  "rules": {
-    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
-  },
-    "parser": "@typescript-eslint/parser",
+  "root": true,
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "taro",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "prettier",
+    "react"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "useJSXTextNode": true,
-    "project": "./tsconfig.json"
+    "useJSXTextNode": true
+  },
+  "rules": {
+    "import/prefer-default-export": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
+  },
+  "globals": {
+    "wx": true
   }
-  }
+}

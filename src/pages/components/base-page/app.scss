@@ -1,0 +1,35 @@
+@mixin base-page-mixin {
+  &-content {
+    height: calc(100vh - 100rpx);
+
+    &-inner {
+      max-width: 100%;
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+}
+
+.home,
+.rumor {
+  @include base-page-mixin;
+}
+
+.home {
+  &-content {
+    background-color: #f8f8f8;
+
+    &-inner {
+      padding-right: 32px;
+    }
+  }
+}
+
+.rumor {
+  &-content {
+    &-inner {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
+}

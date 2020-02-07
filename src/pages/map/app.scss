@@ -1,0 +1,83 @@
+.map {
+  &-case {
+    padding-top: 48px;
+    font: 36px/80px -apple-system-font, system-ui, -apple-system, Segoe UI,
+      Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, Helvetica Neue,
+      PingFang SC, Hiragino Sans GB, Microsoft YaHei UI, Microsoft YaHei, Arial;
+
+    &-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 80px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        background-color: #e10000;
+      }
+
+      &-info {
+        padding-left: 32px;
+      }
+
+      &-warning {
+        margin-left: 0;
+        color: #737373;
+        font-size: 20px;
+      }
+    }
+
+    &-nav {
+      display: flex;
+      padding-right: 40px;
+
+      &-name {
+        overflow: hidden;
+        display: inline-block;
+        width: 187px;
+        min-width: 187px;
+        height: 80px;
+        text-align: center;
+      }
+
+      &-confirmed {
+        color: #e10000;
+      }
+
+      &-cured {
+        color: #31ac76;
+      }
+
+      &-format {
+        flex: 1;
+        overflow: hidden;
+        display: inline-block;
+        width: 134px;
+        height: 80px;
+        text-align: center;
+      }
+    }
+  }
+
+  &-body {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.clearfix {
+  &::after {
+    content: '.';
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+  }
+}

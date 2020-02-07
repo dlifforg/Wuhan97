@@ -1,0 +1,80 @@
+%base-triangle {
+  content: '.';
+  display: block;
+  position: absolute;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  right: 30px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.cell {
+  display: flex;
+  height: 84px;
+  line-height: 84px;
+  color: #222;
+  text-align: center;
+  padding-right: 40px;
+  font-size: 25px;
+  background-color: #fff;
+  position: relative;
+
+  &-hide {
+    display: none;
+  }
+
+  &-province {
+    font-size: 30px;
+
+    &::before {
+      @extend %base-triangle;
+      border-width: 8px 8px 0 8px;
+      border-color: #737373 transparent transparent transparent;
+    }
+
+    &-even {
+      background-color: #f8f8f8;
+    }
+
+    &-active {
+      background-color: #f8f8f8;
+      font-size: 30px;
+
+      &::before {
+        @extend %base-triangle;
+        border-width: 0 8px 8px 8px;
+        border-color: transparent transparent #737373 transparent;
+      }
+    }
+  }
+
+  &-format {
+    flex: 1;
+    overflow: hidden;
+    width: 128px;
+    height: 100%;
+  }
+
+  &-name {
+    overflow: hidden;
+    width: 187px;
+    min-width: 187px;
+    max-width: 187px;
+    height: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  &-confirmed {
+    color: #e10000;
+  }
+
+  &-cured {
+    color: #31ac76;
+  }
+}
