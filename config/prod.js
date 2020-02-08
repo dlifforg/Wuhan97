@@ -1,17 +1,27 @@
 module.exports = {
   env: {
-    NODE_ENV: '"production"'
+    NODE_ENV: '"production"',
   },
-  defineConstants: {},
-  mini: {},
-  h5: {
-    /**
-     * 如果h5端编译后体积过大，可以使用webpack-bundle-analyzer插件对打包体积进行分析。
-     * 参考代码如下：
-     * webpackChain (chain) {
-     *   chain.plugin('analyzer')
-     *     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])
-     * }
-     */
-  }
+  csso: {
+    enable: true,
+    config: {
+      restructure: false,
+    },
+  },
+  uglify: {
+    enable: true,
+    config: {},
+  },
+  defineConstants: {
+    BASE_URL: '"https://workteams.net/index"',
+  },
+  mini: {
+    postcss: {
+      autoprefixer: {
+        enable: true,
+        config: {},
+      },
+    },
+  },
+  h5: {},
 }

@@ -19,3 +19,6 @@ declare const process: {
 
 // @ts-ignore
 declare const wx: any
+
+// @ts-ignore
+declare const BASE_URL: string

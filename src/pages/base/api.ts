@@ -2,11 +2,10 @@ import to from 'await-to-js'
 
 import Tool from '../../utils/tool'
 import * as http from '../../utils/http'
-import { BASE_URL } from '../../base/constants'
 import { IResponseError } from '../../base/interfaces'
 
 const fetchCallback = (
-  error: IResponseError,
+  error: IResponseError | Error | null,
   data: object,
   cb?: Function | undefined | null,
   isShowToast = true,
@@ -14,6 +13,7 @@ const fetchCallback = (
   const placeholder = void 0
 
   if (error) {
+    // @ts-ignore
     const wrappedError: string = (error.errMsg || error) as string
     const [resultingError] = wrappedError.split('-')
 
@@ -61,7 +61,7 @@ const fetchWrapper = (outerQuery = {}) => (
 
     wx.hideLoading()
 
-    return fetchCallback(error, data, cb, isShowToast)
+    return fetchCallback(error, data as object, cb, isShowToast)
   }
 }
 const wxFetchWrapper = (method: string, isShowToast = true) => {

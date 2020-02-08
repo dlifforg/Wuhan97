@@ -1,8 +1,10 @@
 module.exports = {
   env: {
-    NODE_ENV: '"development"'
+    NODE_ENV: '"development"',
   },
-  defineConstants: {},
+  defineConstants: {
+    BASE_URL: '"https://workteams.net/index"',
+  },
   mini: {},
-  h5: {}
+  h5: {},
 }

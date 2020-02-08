@@ -1,3 +1,5 @@
+const path = require('path')
+
 const config = {
   projectName: 'Wuhan97',
   date: '2020-1-24',
@@ -37,6 +39,11 @@ const config = {
   plugins: [],
   defineConstants: {},
   mini: {
+    compile: {
+      exclude: [
+        path.resolve(__dirname, '..', 'src/components/echarts/lib/echarts.js'),
+      ],
+    },
     postcss: {
       pxtransform: {
         enable: true,

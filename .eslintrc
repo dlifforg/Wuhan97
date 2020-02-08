@@ -19,7 +19,9 @@
     "useJSXTextNode": true
   },
   "rules": {
+    "import/no-commonjs": 0,
     "import/prefer-default-export": 0,
+    "@typescript-eslint/ban-ts-ignore": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/interface-name-prefix": 0,
     "@typescript-eslint/member-delimiter-style": 0,
@@ -27,6 +29,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
   },
   "globals": {
-    "wx": true
+    "wx": true,
+    "BASE_URL": true,
   }
 }
