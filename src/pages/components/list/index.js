@@ -1,3 +1,1 @@
-import List from './app'
-
-export { List, List as default }
+export { default as List, default } from './app'

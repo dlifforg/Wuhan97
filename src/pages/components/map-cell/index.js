@@ -1,1 +1,1 @@
-export { MapCell, MapCell as default } from './app'
+export { default as MapCell, default } from './app'

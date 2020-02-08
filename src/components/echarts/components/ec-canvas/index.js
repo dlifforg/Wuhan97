@@ -1,3 +1,1 @@
-import EcCanvas from './app'
-
-export { EcCanvas, EcCanvas as default }
+export { default as EcCanvas, default } from './app'

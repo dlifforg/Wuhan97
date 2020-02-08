@@ -1,3 +1,1 @@
-import HomeCard from './app'
-
-export { HomeCard, HomeCard as default }
+export { default as HomeCard, default } from './app'

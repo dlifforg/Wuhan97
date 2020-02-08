@@ -1,3 +1,1 @@
-import Title from './app'
-
-export { Title, Title as default }
+export { default as Title, default } from './app'

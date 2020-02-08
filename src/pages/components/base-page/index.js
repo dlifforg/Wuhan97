@@ -1,3 +1,1 @@
-import BasePage from './app'
-
-export { BasePage, BasePage as default }
+export { default as BasePage, default } from './app'

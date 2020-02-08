@@ -1,3 +1,1 @@
-import RumorCard from './app'
-
-export { RumorCard, RumorCard as default }
+export { default as RumorCard, default } from './app'
