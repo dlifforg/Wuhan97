@@ -58,6 +58,10 @@ export default class List extends Component {
     return this.fetchFilteredList({}, page, size)
   }
 
+  responseFilter(list: object[]) {
+    return list
+  }
+
   fetchListCallback(size: number) {
     return (error: IResponseError, list = []) => {
       if (error) return this.setState({ isFailed: true })
@@ -93,7 +97,9 @@ export default class List extends Component {
   updateListCallback(list: object[]) {
     const { [this.listFieldName]: realList = [] } = this.state
 
-    return this.setState({ [this.listFieldName]: [...realList, ...list] })
+    return this.setState({
+      [this.listFieldName]: this.responseFilter([...realList, ...list]),
+    })
   }
 
   fetchFilteredListWrapper(page: number) {

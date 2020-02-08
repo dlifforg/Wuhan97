@@ -4,7 +4,7 @@ import { List } from '../components/list'
 import { BasePage } from '../components/base-page'
 import { HomeCard } from '../components/home-card'
 
-import { IHomeState } from '../../base/interfaces'
+import { INews, IHomeState } from '../../base/interfaces'
 
 import './app.scss'
 
@@ -20,6 +20,16 @@ export default class Home extends List {
   state: IHomeState = {
     ...Home.defaultProps,
     newsList: [],
+  }
+
+  responseFilter(list: INews[]) {
+    return list.map(({ title, pubDate, summary, infoSource, pubDateStr }) => ({
+      title,
+      pubDate,
+      summary,
+      infoSource,
+      pubDateStr,
+    }))
   }
 
   render() {
