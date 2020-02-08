@@ -9,9 +9,9 @@ import { IHomeState } from '../../base/interfaces'
 import './app.scss'
 
 export default class Home extends List {
-  listFieldName = 'pneumoniaList'
+  listFieldName = 'newsList'
 
-  fetchMethodFieldName = 'fetchPneumoniaList'
+  fetchMethodFieldName = 'fetchNewsList'
 
   config: Config = {
     navigationBarTitleText: '实时疫情',
@@ -19,29 +19,29 @@ export default class Home extends List {
 
   state: IHomeState = {
     ...Home.defaultProps,
-    pneumoniaList: [],
+    newsList: [],
   }
 
   render() {
-    const { pneumoniaList } = this.state
+    const { newsList } = this.state
 
     return (
       <BasePage
-        title='实时疫情'
+        title='联播快讯'
         className='home'
         onScrollToUpper={this.reachTopEventHandler}
         onScrollToLower={this.reachBottomEventHandler}
       >
-        {pneumoniaList.map((pneumonia, index, list) => (
+        {newsList.map((news, index, list) => (
           <HomeCard
             key={index + 1}
+            title={news.title}
             isLatest={index < 1}
-            title={pneumonia.title}
-            content={pneumonia.summary}
-            source={pneumonia.infoSource}
-            timestamp={pneumonia.pubDate}
+            content={news.summary}
+            source={news.infoSource}
+            timestamp={news.pubDate}
+            relativeTime={news.pubDateStr}
             isLast={index + 1 === list.length}
-            relativeTime={pneumonia.pubDateStr}
           />
         ))}
       </BasePage>

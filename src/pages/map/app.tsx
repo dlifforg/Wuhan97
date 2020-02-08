@@ -165,7 +165,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
 
     return (
       <View className='map'>
-        <Title className='map' title='疫情地图' />
+        <Title className='map' title='疫情盘点' />
         <View className='map-body'>
           <View className='map-china'>
             <Echart option={option} style='height: 718rpx' />

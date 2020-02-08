@@ -27,7 +27,7 @@ export default class Rumor extends List {
 
     return (
       <BasePage
-        title='辟除谣言'
+        title='谣言终结'
         className='rumor'
         onScrollToUpper={this.reachTopEventHandler}
         onScrollToLower={this.reachBottomEventHandler}

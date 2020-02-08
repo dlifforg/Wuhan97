@@ -1,7 +1,19 @@
+export interface INews {
+  title: string
+  pubDate: number
+  summary: string
+  infoSource: string
+  pubDateStr: string
+}
+
 interface IBaseListState {
   page: number
   isFailed: boolean
   isFetchAllData: boolean
+}
+
+interface IOptionalProps {
+  [index: string]: any
 }
 
 export interface IResponse {
@@ -18,14 +30,6 @@ export interface IAreaProps {
   suspected: number
   isActive?: boolean
   isProvince?: boolean
-}
-
-export interface IPneumonia {
-  title: string
-  pubDate: number
-  summary: string
-  infoSource: string
-  pubDateStr: string
 }
 
 export interface ITitleProps {
@@ -46,17 +50,6 @@ export interface ITitleProps {
 // export interface IAreaState {
 //   isActiveProvince: boolean
 // }
-
-export interface IResponseData {
-  error?: any
-  data: object
-  message: string
-  code: number | string
-  errmsg?: string | undefined
-  result?: object | undefined
-  status?: number | undefined
-  success?: boolean | undefined
-}
 
 export interface IHomeCardProps {
   title: string
@@ -96,11 +89,7 @@ export interface IPneumoniaMapState {
 }
 
 export interface IHomeState extends IBaseListState {
-  pneumoniaList: IPneumonia[]
-}
-
-export interface IListState extends IBaseListState {
-  [index: string]: any
+  newsList: INews[]
 }
 
 export interface IBasePageProps extends ITitleProps {
@@ -111,4 +100,18 @@ export interface IBasePageProps extends ITitleProps {
 
 export interface IRumorState extends IBaseListState {
   rumorList: IRumorCardProps[]
+}
+
+export interface IResponseData extends IOptionalProps {
+  error?: any
+  data?: object
+  message: string
+  code: number | string
+  errmsg?: string | undefined
+  result?: object | undefined
+  status?: number | undefined
+}
+
+export interface IListState extends IBaseListState, IOptionalProps {
+  // noop
 }

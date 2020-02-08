@@ -2,6 +2,8 @@ import Tool from './tool'
 import { timeout } from '../base/constants'
 import { IResponse, IResponseData, IResponseError } from '../base/interfaces'
 
+const dataFieldName = 'Data'
+
 const success = (response: IResponse) => {
   let { data = {} } = response
   if (typeof data === 'string') {
@@ -18,17 +20,17 @@ const success = (response: IResponse) => {
   const {
     status,
     result,
-    data: realData,
     message: nativeMessage,
     errmsg: mockErrorMessage,
-    success: isSuccess = true,
+    [dataFieldName]: realData,
   } = data as IResponseData
 
-  if (!status && realData !== null && isSuccess) return realData || result
+  if (!status && realData !== null) return realData || result
   if (mockErrorMessage || nativeMessage) throw mockErrorMessage || nativeMessage
 
   return realData
 }
+
 const fail = (error: IResponseError) => {
   throw error.errMsg || error
 }
@@ -51,6 +53,7 @@ const request = (method: string, url: string, query: object, config = {}) => {
     }),
   ])
 }
+
 const uploadFile = (url: string, option: object, rest: object) => {
   return Tool.toWxAPIPromisify(wx.uploadFile)({
     url,

@@ -54,24 +54,11 @@ export default class List extends Component {
     this.pullDownRefreshEventHandler()
   }
 
-  reachBottomEventHandler = () => {
-    const { page, isFailed, isFetchAllData } = this.state
-    if (isFetchAllData) return
-
-    if (isFailed) {
-      return this.fetchFilteredListWrapper(page)
-    }
-
-    return this.setState({ page: page + 1 }, () =>
-      this.fetchFilteredListWrapper(this.state.page),
-    )
+  fetchList(page = 1, size = 10) {
+    return this.fetchFilteredList({}, page, size)
   }
 
-  fetchList(page = 1, limit = 10) {
-    return this.fetchFilteredList({}, page, limit)
-  }
-
-  fetchListCallback(limit: number) {
+  fetchListCallback(size: number) {
     return (error: IResponseError, list = []) => {
       if (error) return this.setState({ isFailed: true })
 
@@ -83,11 +70,24 @@ export default class List extends Component {
           this.setState({ isFetchAllData: true })
         }
       }
-      reset.call(this, list.length, limit)
+      reset.call(this, list.length, size)
       if (!list.length) return
 
       return this.updateListCallback(list)
     }
+  }
+
+  reachBottomEventHandler = () => {
+    const { page, isFailed, isFetchAllData } = this.state
+    if (isFetchAllData) return
+
+    if (isFailed) {
+      return this.fetchFilteredListWrapper(page)
+    }
+
+    return this.setState({ page: page + 1 }, () =>
+      this.fetchFilteredListWrapper(this.state.page),
+    )
   }
 
   updateListCallback(list: object[]) {
@@ -107,9 +107,11 @@ export default class List extends Component {
     return this.resetter()
   }
 
-  fetchFilteredList(filterMap: object, page: number, limit = 10) {
-    const query = { page, size: limit, ...filterMap }
+  fetchFilteredList(filterMap: object, page: number, size = 10) {
+    const offset = (page - 1) * size
+    const limit = offset + size
+    const query = { offset, limit, ...filterMap }
 
-    api[this.fetchMethodFieldName](this.fetchListCallback(limit), query)
+    api[this.fetchMethodFieldName](this.fetchListCallback(size), query)
   }
 }

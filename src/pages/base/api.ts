@@ -34,7 +34,7 @@ const fetchCallback = (
 
   return cb && cb(placeholder, data), data
 }
-const fetchWrapper = (
+const fetchWrapper = (outerQuery = {}) => (
   url: string,
   method = 'get',
   config = {},
@@ -54,7 +54,9 @@ const fetchWrapper = (
         return template.replace(/:[^/]+/, replacer)
       }, resultingUrl)
     }
-    const [error, data] = await to(http[method](resultingUrl, query, config))
+    const [error, data] = await to(
+      http[method](resultingUrl, { ...outerQuery, ...query }, config),
+    )
 
     wx.hideLoading()
 
@@ -69,11 +71,13 @@ const wxFetchWrapper = (method: string, isShowToast = true) => {
   }
 }
 
-export const fetchRumorList = fetchWrapper(`${BASE_URL}/rumor/list`)
-export const fetchPneumoniaList = fetchWrapper(`${BASE_URL}/pneumonia/list`)
+export const fetchNewsList = fetchWrapper({ prefix: 'News' })(`${BASE_URL}`)
+export const fetchRumorList = fetchWrapper({ prefix: 'FakeNews' })(
+  `${BASE_URL}`,
+)
 
 // built-in wx api
-export const getSystemInfo = wxFetchWrapper('getSystemInfo')
 export const getSetting = wxFetchWrapper('getSetting')
-export const setClipboardData = wxFetchWrapper('setClipboardData', false)
+export const getSystemInfo = wxFetchWrapper('getSystemInfo')
 export const getLocation = wxFetchWrapper('getLocation', false)
+export const setClipboardData = wxFetchWrapper('setClipboardData', false)
