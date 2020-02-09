@@ -1,15 +1,15 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import { EcCanvas } from './components'
+import { EcCanvas } from '../ec-canvas'
 
-import Tool from '../../utils/tool'
-import * as echarts from './lib/echarts'
-import geoJson from './json/china.geo.json'
+import Tool from '../../../../utils/tool'
+import * as echarts from '../../lib/echarts'
+import geoJson from '../../json/china.geo.json'
 
 import './app.scss'
 
-class Echart extends Component {
+export default class EcMap extends Component {
   state = {
     defaultEc: {
       lazyLoad: false,
@@ -104,8 +104,6 @@ class Echart extends Component {
       )
     }
 
-    return <View></View>
+    return <View />
   }
 }
-
-export { Echart, echarts }
