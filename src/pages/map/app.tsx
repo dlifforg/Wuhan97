@@ -1,103 +1,19 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import dayjs from 'dayjs'
+import * as api from '../base/api'
 
 import { Title } from '../components/title'
 import { MapCell } from '../components/map-cell'
 import { EcMap } from '../../components/echarts'
 import { SumCard } from '../components/sum-card'
 
-import MapList from './mapList.json'
-import { IPneumoniaMapState } from '../../base/interfaces'
+import { IPneumoniaMapState, IResponseError } from '../../base/interfaces'
 
 import './app.scss'
 
 const now = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
-const mapData = [
-  { name: '湖北', value: 11177 },
-  { name: '浙江', value: 714 },
-  { name: '广东', value: 683 },
-  { name: '河南', value: 566 },
-  { name: '湖南', value: 521 },
-  { name: '安徽', value: 408 },
-  { name: '江西', value: 391 },
-  { name: '重庆', value: 312 },
-  { name: '江苏', value: 271 },
-  { name: '四川', value: 254 },
-  { name: '山东', value: 246 },
-  { name: '上海', value: 193 },
-  { name: '北京', value: 191 },
-  { name: '福建', value: 179 },
-  { name: '陕西', value: 128 },
-  { name: '广西', value: 127 },
-  { name: '黑龙江', value: 118 },
-  { name: '河北', value: 113 },
-  { name: '云南', value: 105 },
-  { name: '辽宁', value: 73 },
-  { name: '海南', value: 71 },
-  { name: '山西', value: 66 },
-  { name: '天津', value: 56 },
-  { name: '甘肃', value: 51 },
-  { name: '贵州', value: 46 },
-  { name: '内蒙古', value: 34 },
-  { name: '宁夏', value: 31 },
-  { name: '吉林', value: 31 },
-  { name: '新疆', value: 24 },
-  { name: '香港', value: 15 },
-  { name: '青海', value: 13 },
-  { name: '台湾', value: 10 },
-  { name: '澳门', value: 8 },
-  { name: '西藏', value: 1 },
-  { name: '南海诸岛', value: 0 },
-]
-const sumData = [
-  {
-    today: 37251,
-    compared: 3916,
-  },
-  {
-    today: 28942,
-    compared: 2657,
-  },
-  {
-    today: 812,
-    compared: 89,
-  },
-  {
-    today: 2684,
-    compared: 633,
-  },
-]
-const currentMapList = MapList.listByArea.map(
-  ({
-    cities,
-    provinceShortName,
-    dead: provinceDead,
-    cured: provinceCured,
-    confirmed: provinceConfirmed,
-    suspected: provinceSuspected,
-  }) => ({
-    isShow: true,
-    isActive: false,
-    isProvince: true,
-    dead: provinceDead,
-    name: provinceShortName,
-    cured: provinceCured,
-    confirmed: provinceConfirmed,
-    suspected: provinceSuspected,
-    cities: cities.map(
-      ({ cityName: name, confirmed, suspected, cured, dead }) => ({
-        dead,
-        name,
-        cured,
-        confirmed,
-        suspected,
-        isShow: false,
-        isProvince: false,
-      }),
-    ),
-  }),
-)
+const mapData = []
 
 const option = {
   backgroundColor: '#f8f8f8',
@@ -161,14 +77,15 @@ const option = {
 export default class PneumoniaMap extends Component<IPneumoniaMapState> {
   listFieldName = 'mapList'
 
-  // fetchMethodFieldName = 'fetchMapList'
+  fetchMethodFieldName = 'fetchMapList'
 
   config: Config = {
     navigationBarTitleText: '疫情地图',
   }
 
   state: IPneumoniaMapState = {
-    mapList: currentMapList,
+    mapList: [],
+    sumData: [],
   }
 
   toggleEventHandler = (index: number) => {
@@ -184,8 +101,92 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
     this.setState({ mapList: newMapList })
   }
 
+  componentWillMount() {
+    this.fetchMapList()
+  }
+
+  onPullDownRefresh() {
+    this.fetchMapList()
+    wx.stopPullDownRefresh()
+  }
+
+  fetchMapList() {
+    api[this.fetchMethodFieldName](this.fetchMapListCallback())
+  }
+
+  fetchMapListCallback() {
+    return (error: IResponseError, list = []) => {
+      if (error) return
+      const areaData = list.listByArea
+      areaData.map(provinceItem => {
+        mapData.push({
+          name: provinceItem.provinceShortName,
+          value: provinceItem.confirmed,
+        })
+      })
+      const currentMapList = this.formatMapTable(areaData)
+      const statistics = list.statistics
+      const sumData = [
+        {
+          name: 'confirmed',
+          today: statistics.confirmedCount,
+          compared: statistics.confirmedIncr,
+        },
+        {
+          name: 'suspected',
+          today: statistics.suspectedCount,
+          compared: statistics.suspectedIncr,
+        },
+        {
+          name: 'dead',
+          today: statistics.deadCount,
+          compared: statistics.deadIncr,
+        },
+        {
+          name: 'cure',
+          today: statistics.curedCount,
+          compared: statistics.curedIncr,
+        },
+      ]
+      this.setState({ sumData, mapList: currentMapList })
+    }
+  }
+
+  formatMapTable(list) {
+    return list.map(
+      ({
+        cities,
+        provinceShortName,
+        dead: provinceDead,
+        cured: provinceCured,
+        confirmed: provinceConfirmed,
+        suspected: provinceSuspected,
+      }) => ({
+        isShow: true,
+        isActive: false,
+        isProvince: true,
+        dead: provinceDead,
+        name: provinceShortName,
+        cured: provinceCured,
+        confirmed: provinceConfirmed,
+        suspected: provinceSuspected,
+        cities: cities.map(
+          ({ cityName: name, confirmed, suspected, cured, dead }) => ({
+            dead,
+            name,
+            cured,
+            confirmed,
+            suspected,
+            isShow: false,
+            isProvince: false,
+          }),
+        ),
+      }),
+    )
+  }
+
   render() {
-    const { mapList } = this.state
+    const { mapList, sumData } = this.state
 
     return (
       <View className='map'>

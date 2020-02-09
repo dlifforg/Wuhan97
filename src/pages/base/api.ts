@@ -76,6 +76,7 @@ export const fetchGuideList = fetchWrapper({ prefix: 'Care' })(
 export const fetchRumorList = fetchWrapper({ prefix: 'FakeNews' })(
   `${BASE_URL}/index`,
 )
+export const fetchMapList = fetchWrapper()(`${BASE_URL}/dashboard`)
 
 // built-in wx api
 export const getSetting = wxFetchWrapper('getSetting')

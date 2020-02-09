@@ -86,6 +86,8 @@ interface IMapProps extends IAreaProps {
 
 export interface IPneumoniaMapState {
   mapList: IMapProps[]
+  sumData: []
+  mapData: []
 }
 
 export interface IGuideCardProps extends IGuide {
