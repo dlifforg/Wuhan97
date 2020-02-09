@@ -13,7 +13,7 @@ module.exports = {
     config: {},
   },
   defineConstants: {
-    BASE_URL: '"https://workteams.net/index"',
+    BASE_URL: '"https://workteams.net"',
   },
   mini: {
     postcss: {

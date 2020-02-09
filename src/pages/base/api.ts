@@ -72,9 +72,11 @@ const wxFetchWrapper = (method: string, isShowToast = true) => {
   }
 }
 
-export const fetchNewsList = fetchWrapper({ prefix: 'News' })(`${BASE_URL}`)
+export const fetchNewsList = fetchWrapper({ prefix: 'News' })(
+  `${BASE_URL}/index`,
+)
 export const fetchRumorList = fetchWrapper({ prefix: 'FakeNews' })(
-  `${BASE_URL}`,
+  `${BASE_URL}/index`,
 )
 
 // built-in wx api
