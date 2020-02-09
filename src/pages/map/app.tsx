@@ -3,7 +3,7 @@ import { View, Text } from '@tarojs/components'
 
 import { Title } from '../components/title'
 import { MapCell } from '../components/map-cell'
-import { Echart } from '../../components/echarts'
+import { EcMap } from '../../components/echarts'
 
 import MapList from './mapList.json'
 import { IPneumoniaMapState } from '../../base/interfaces'
@@ -168,7 +168,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
         <Title className='map' title='疫情盘点' />
         <View className='map-body'>
           <View className='map-china'>
-            <Echart option={option} style='height: 718rpx' />
+            <EcMap option={option} style='height: 718rpx' />
           </View>
           <View className='map-case'>
             <View className='map-case-title'>

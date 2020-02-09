@@ -6,18 +6,34 @@
     "plugin:prettier/recommended"
   ],
   "plugins": [
-    "@typescript-eslint",
     "import",
     "prettier",
     "react"
   ],
-  "parser": "@typescript-eslint/parser",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
-    },
-    "useJSXTextNode": true
+    }
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "plugins": [
+        "@typescript-eslint",
+        "import",
+        "prettier",
+        "react"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "useJSXTextNode": true
+      }
+    }
+  ],
   "rules": {
     "import/no-commonjs": 0,
     "import/prefer-default-export": 0,

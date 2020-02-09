@@ -25,6 +25,7 @@ const config = {
       'transform-decorators-legacy',
       'transform-class-properties',
       'transform-object-rest-spread',
+      'transform-export-extensions',
       [
         'transform-runtime',
         {
