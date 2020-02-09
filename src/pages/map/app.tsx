@@ -1,5 +1,6 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
+import dayjs from 'dayjs'
 
 import { Title } from '../components/title'
 import { MapCell } from '../components/map-cell'
@@ -11,6 +12,7 @@ import { IPneumoniaMapState } from '../../base/interfaces'
 
 import './app.scss'
 
+const now = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
 const mapData = [
   { name: '湖北', value: 11177 },
   { name: '浙江', value: 714 },
@@ -99,6 +101,9 @@ const currentMapList = MapList.listByArea.map(
 
 const option = {
   backgroundColor: '#f8f8f8',
+  tooltip: {
+    trigger: 'item',
+  },
   visualMap: [
     {
       type: 'piecewise',
@@ -130,6 +135,7 @@ const option = {
           distance: 5,
         },
         emphasis: {
+          show: true,
           textStyle: {
             color: '#fff',
             fontSize: 8,
@@ -194,7 +200,8 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
               <Text className='map-case-title-warning'>（含港澳台）</Text>
             </View>
             <View className='map-data-tip'>
-              <Text className='map-data-tip-text'>截至2020-02-09 11:01 </Text>
+              <Text className='map-data-tip-text'>截至</Text>
+              <Text className='map-data-tip-text'>{now}</Text>
             </View>
             <View className='map-data-sum'>
               {sumData.map((dataItem, index) => (
