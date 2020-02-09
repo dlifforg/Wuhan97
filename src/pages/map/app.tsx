@@ -69,7 +69,7 @@ const sumData = [
 const currentMapList = MapList.listByArea.map(
   ({
     cities,
-    provinceName,
+    provinceShortName,
     dead: provinceDead,
     cured: provinceCured,
     confirmed: provinceConfirmed,
@@ -79,7 +79,7 @@ const currentMapList = MapList.listByArea.map(
     isActive: false,
     isProvince: true,
     dead: provinceDead,
-    name: provinceName,
+    name: provinceShortName,
     cured: provinceCured,
     confirmed: provinceConfirmed,
     suspected: provinceSuspected,
