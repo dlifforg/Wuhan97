@@ -1,0 +1,29 @@
+.sum {
+  text-align: center;
+  &-des {
+    font-size: 28px;
+    color: #33aa70;
+  }
+  &-num {
+    font-size: 40px;
+    line-height: 60px;
+  }
+  &-compare {
+    font-size: 22px;
+    color: #999;
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+  &-color-type0 {
+    color: #e10000;
+  }
+  &-color-type1 {
+    color: #ffa252;
+  }
+  &-color-type2 {
+    color: #333333;
+  }
+  &-color-type3 {
+    color: #33aa70;
+  }
+}

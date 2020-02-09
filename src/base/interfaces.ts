@@ -32,24 +32,16 @@ export interface IAreaProps {
   isProvince?: boolean
 }
 
+export interface ISumCardProps {
+  type: number
+  todayData: number
+  comparedData: number
+}
+
 export interface ITitleProps {
   title: string
   className: string
 }
-
-// interface ICityProps extends IAreaProps {
-//   cityName: string
-// }
-
-// export interface IMapProps extends IAreaProps {
-//   provinceName: string
-//   cities: ICityProps[]
-//   comment: string
-// }
-
-// export interface IAreaState {
-//   isActiveProvince: boolean
-// }
 
 export interface IHomeCardProps {
   title: string

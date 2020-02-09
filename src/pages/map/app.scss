@@ -64,6 +64,21 @@
       }
     }
   }
+  &-data {
+    padding-top: 48px;
+    &-tip {
+      color: #737373;
+      font-size: 20px;
+      padding-left: 32px;
+    }
+    &-sum {
+      display: flex;
+      padding-top: 24px;
+    }
+    &-item {
+      flex: 1;
+    }
+  }
 
   &-body {
     padding-left: 32px;

@@ -3,6 +3,7 @@ import { View, Text } from '@tarojs/components'
 
 import { Title } from '../components/title'
 import { MapCell } from '../components/map-cell'
+import { SumCard } from '../components/sum-card'
 import { Echart } from '../../components/echarts'
 
 import MapList from './mapList.json'
@@ -47,7 +48,24 @@ const mapData = [
   { name: '西藏', value: 1 },
   { name: '南海诸岛', value: 0 },
 ]
-
+const sumData = [
+  {
+    today: 37251,
+    compared: 3916,
+  },
+  {
+    today: 28942,
+    compared: 2657,
+  },
+  {
+    today: 812,
+    compared: 89,
+  },
+  {
+    today: 2684,
+    compared: 633,
+  },
+]
 const currentMapList = MapList.listByArea.map(
   ({
     cities,
@@ -169,6 +187,27 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
         <View className='map-body'>
           <View className='map-china'>
             <Echart option={option} style='height: 718rpx' />
+          </View>
+          <View className='map-data'>
+            <View className='map-case-title'>
+              <Text className='map-case-title-info'>全国疫情数据</Text>
+              <Text className='map-case-title-warning'>（含港澳台）</Text>
+            </View>
+            <View className='map-data-tip'>
+              <Text className='map-data-tip-text'>截至2020-02-09 11:01 </Text>
+            </View>
+            <View className='map-data-sum'>
+              {sumData.map((dataItem, index) => (
+                <View className='map-data-item'>
+                  <SumCard
+                    key={index + 1}
+                    type={index}
+                    todayData={dataItem.today}
+                    comparedData={dataItem.compared}
+                  />
+                </View>
+              ))}
+            </View>
           </View>
           <View className='map-case'>
             <View className='map-case-title'>
