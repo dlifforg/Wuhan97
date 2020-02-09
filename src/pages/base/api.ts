@@ -42,12 +42,7 @@ const fetchWrapper = (outerQuery = {}) => (
   isShowToast = true,
 ) => {
   return async (cb?: Function, query = {}, ...replacers: string[]) => {
-    // hide former loading before showing a new loading
-    wx.hideLoading({
-      complete() {
-        return wx.showLoading({ title: '载入中...' })
-      },
-    })
+    wx.showLoading({ title: '载入中...' })
 
     let resultingUrl = url
     if (replacers.length) {
