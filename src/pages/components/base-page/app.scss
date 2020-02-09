@@ -1,11 +1,11 @@
-@mixin base-page-mixin {
+@mixin base-page-mixin($padding: 40px) {
   &-content {
     height: calc(100vh - 100rpx);
 
     &-inner {
       max-width: 100%;
-      padding-top: 40px;
-      padding-bottom: 40px;
+      padding-top: $padding;
+      padding-bottom: $padding;
     }
   }
 }
@@ -13,6 +13,10 @@
 .home,
 .rumor {
   @include base-page-mixin;
+}
+
+.guide {
+  @include base-page-mixin(8px);
 }
 
 .home {

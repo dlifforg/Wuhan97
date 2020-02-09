@@ -165,7 +165,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
     mapList: currentMapList,
   }
 
-  clickEventHandler = (index: number) => {
+  toggleEventHandler = (index: number) => {
     const { mapList } = this.state
     const newMapList = JSON.parse(JSON.stringify(mapList))
 
@@ -198,10 +198,10 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
             </View>
             <View className='map-data-sum'>
               {sumData.map((dataItem, index) => (
-                <View className='map-data-item'>
+                <View key={index + 1} className='map-data-item'>
                   <SumCard
-                    key={index + 1}
                     type={index}
+                    key={index + 1}
                     todayData={dataItem.today}
                     comparedData={dataItem.compared}
                   />
@@ -231,7 +231,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
               {mapList.map((provinceCase, index) => (
                 <View
                   key={index + 1}
-                  onClick={() => this.clickEventHandler(index)}
+                  onClick={this.toggleEventHandler.bind(this, index)}
                 >
                   <MapCell
                     isEven={index % 2 === 0}

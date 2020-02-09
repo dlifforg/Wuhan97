@@ -6,6 +6,14 @@ export interface INews {
   pubDateStr: string
 }
 
+export interface IGuide {
+  title: string
+  imgUrl: string
+  linkUrl: string
+  createTime: number
+  contentType: number
+}
+
 interface IBaseListState {
   page: number
   isFailed: boolean
@@ -32,15 +40,15 @@ export interface IAreaProps {
   isProvince?: boolean
 }
 
+export interface ITitleProps {
+  title: string
+  className: string
+}
+
 export interface ISumCardProps {
   type: number
   todayData: number
   comparedData: number
-}
-
-export interface ITitleProps {
-  title: string
-  className: string
 }
 
 export interface IHomeCardProps {
@@ -80,6 +88,10 @@ export interface IPneumoniaMapState {
   mapList: IMapProps[]
 }
 
+export interface IGuideCardProps extends IGuide {
+  key?: number
+}
+
 export interface IHomeState extends IBaseListState {
   newsList: INews[]
 }
@@ -88,6 +100,10 @@ export interface IBasePageProps extends ITitleProps {
   children: any
   onScrollToLower(event: any): any
   onScrollToUpper(event: any): any
+}
+
+export interface IGuideState extends IBaseListState {
+  guideList: IGuide[]
 }
 
 export interface IRumorState extends IBaseListState {

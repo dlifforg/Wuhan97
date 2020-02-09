@@ -1,6 +1,8 @@
 export { List } from './list'
 export { Title } from './title'
 export { MapCell } from './map-cell'
+export { SumCard } from './sum-card'
 export { BasePage } from './base-page'
 export { HomeCard } from './home-card'
+export { GuideCard } from './guide-card'
 export { RumorCard } from './rumor-card'

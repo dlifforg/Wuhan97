@@ -65,7 +65,7 @@ const fetchWrapper = (outerQuery = {}) => (
   }
 }
 const wxFetchWrapper = (method: string, isShowToast = true) => {
-  return async (cb: Function, option = {}) => {
+  return async (cb: Function | undefined, option = {}) => {
     const [error, data] = await to(Tool.toWxAPIPromisify(wx[method])(option))
 
     return fetchCallback(error, data as object, cb, isShowToast)
@@ -73,6 +73,9 @@ const wxFetchWrapper = (method: string, isShowToast = true) => {
 }
 
 export const fetchNewsList = fetchWrapper({ prefix: 'News' })(
+  `${BASE_URL}/index`,
+)
+export const fetchGuideList = fetchWrapper({ prefix: 'Care' })(
   `${BASE_URL}/index`,
 )
 export const fetchRumorList = fetchWrapper({ prefix: 'FakeNews' })(
