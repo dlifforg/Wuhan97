@@ -48,16 +48,12 @@ export default class HomeCard extends Component<IHomeCardProps> {
             </View>
             <View className='home-card-text-middle'>{content}</View>
             <View className='home-card-text-bottom-wrapper'>
-              {hasDistrict && (
-                <Text className='home-card-text-bottom-left-content'>
-                  所属地区：{provinceName}
-                </Text>
-              )}
-              {hasSource && (
-                <Text className='home-card-text-bottom-right-content'>
-                  信息来源：{source}
-                </Text>
-              )}
+              <Text className='home-card-text-bottom-left-content'>
+                {hasDistrict && `所属地区：${provinceName}`}
+              </Text>
+              <Text className='home-card-text-bottom-right-content'>
+                {hasSource && `信息来源：${source}`}
+              </Text>
             </View>
           </View>
         </View>
