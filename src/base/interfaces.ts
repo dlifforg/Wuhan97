@@ -4,12 +4,9 @@ interface ISummaryData {
   compared: number
 }
 
-export interface INews {
+interface IBaseHome {
   title: string
-  pubDate: number
-  summary: string
-  infoSource: string
-  pubDateStr: string
+  provinceName: string
 }
 
 export interface IGuide {
@@ -43,6 +40,7 @@ interface IBasePneumoniaMap {
 
 export interface ITitleProps {
   title: string
+  children?: any
   className: string
 }
 
@@ -50,16 +48,6 @@ export interface ISumCardProps {
   type: number
   todayData: number
   comparedData: number
-}
-
-export interface IHomeCardProps {
-  title: string
-  content: string
-  timestamp: number
-  relativeTime: string
-  source?: string | undefined
-  isLast?: boolean | undefined
-  isLatest?: boolean | undefined
 }
 
 export interface IResponseError {
@@ -81,6 +69,13 @@ export interface IRumorCardState {
   isToggled: boolean
 }
 
+export interface INews extends IBaseHome {
+  pubDate: number
+  summary: string
+  infoSource: string
+  pubDateStr: string
+}
+
 export interface IPneumoniaMapResponseStatistics {
   deadIncr: number
   deadCount: number
@@ -92,11 +87,20 @@ export interface IPneumoniaMapResponseStatistics {
   confirmedCount: number
 }
 
+export interface IHomeCardProps extends IBaseHome {
+  content: string
+  timestamp: number
+  relativeTime: string
+  source?: string | undefined
+  isLast?: boolean | undefined
+  isLatest?: boolean | undefined
+}
+
 export interface IAreaProps extends IBasePneumoniaMap {
   name: string
   isShow: boolean
-  isHubei: boolean
   isEven?: boolean
+  isHubei: boolean
   isActive?: boolean
   isProvince?: boolean
 }

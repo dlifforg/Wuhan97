@@ -15,6 +15,7 @@ export default class HomeCard extends Component<IHomeCardProps> {
       content,
       timestamp,
       relativeTime,
+      provinceName,
       isLast = false,
       isLatest = false,
     } = this.props
@@ -45,9 +46,16 @@ export default class HomeCard extends Component<IHomeCardProps> {
               <Text className='home-card-text-top'>{title}</Text>
             </View>
             <View className='home-card-text-middle'>{content}</View>
-            {hasSource && (
-              <View className='home-card-text-bottom'>信息来源：{source}</View>
-            )}
+            <View className='home-card-text-bottom-wrapper'>
+              <Text className='home-card-text-bottom-left-content'>
+                所属地区：{provinceName}
+              </Text>
+              {hasSource && (
+                <Text className='home-card-text-bottom-right-content'>
+                  信息来源：{source}
+                </Text>
+              )}
+            </View>
           </View>
         </View>
       </View>

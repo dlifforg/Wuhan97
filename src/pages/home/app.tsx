@@ -23,13 +23,16 @@ export default class Home extends List {
   }
 
   responseFilter(list: INews[]) {
-    return list.map(({ title, pubDate, summary, infoSource, pubDateStr }) => ({
-      title,
-      pubDate,
-      summary,
-      infoSource,
-      pubDateStr,
-    }))
+    return list.map(
+      ({ title, pubDate, summary, infoSource, pubDateStr, provinceName }) => ({
+        title,
+        pubDate,
+        summary,
+        infoSource,
+        pubDateStr,
+        provinceName,
+      }),
+    )
   }
 
   render() {
@@ -51,6 +54,7 @@ export default class Home extends List {
             source={news.infoSource}
             timestamp={news.pubDate}
             relativeTime={news.pubDateStr}
+            provinceName={news.provinceName}
             isLast={index + 1 === list.length}
           />
         ))}

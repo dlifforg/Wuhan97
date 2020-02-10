@@ -129,10 +129,18 @@
     }
 
     &-bottom {
-      margin-top: 8px;
-      color: #999;
-      font-size: 24px;
-      text-align: right;
+      &-wrapper {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        color: #999;
+        font-size: 0;
+      }
+
+      &-left-content,
+      &-right-content {
+        font-size: 24px;
+      }
     }
   }
 

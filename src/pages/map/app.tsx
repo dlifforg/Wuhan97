@@ -136,7 +136,9 @@ export default class PneumoniaMap extends Component {
 
     return (
       <View className='map'>
-        <Title className='map' title='疫情盘点' />
+        <Title className='map' title='疫情盘点'>
+          数据来源：国家及各省市地区卫健委
+        </Title>
         <View className='map-body'>
           <View className='map-china'>
             <EcMap option={this.mapOption} style='height: 718rpx' />
@@ -175,7 +177,6 @@ export default class PneumoniaMap extends Component {
               <Text className='map-case-nav-format map-case-nav-confirmed'>
                 确诊
               </Text>
-
               <Text className='map-case-nav-format map-case-nav-cured'>
                 治愈
               </Text>
@@ -194,11 +195,11 @@ export default class PneumoniaMap extends Component {
                     name={provinceCase.name}
                     cured={provinceCase.cured}
                     isShow={provinceCase.isShow}
-                    isHubei={provinceCase.name == '湖北'}
                     isActive={provinceCase.isActive}
                     confirmed={provinceCase.confirmed}
                     suspected={provinceCase.suspected}
                     isProvince={provinceCase.isProvince}
+                    isHubei={provinceCase.name == '湖北'}
                   />
                   {provinceCase.isActive &&
                     provinceCase.cities.map((cityCase, indexCity) => (
@@ -208,10 +209,10 @@ export default class PneumoniaMap extends Component {
                         name={cityCase.name}
                         cured={cityCase.cured}
                         isShow={cityCase.isShow}
-                        isHubei={provinceCase.name == '湖北'}
                         confirmed={cityCase.confirmed}
                         suspected={cityCase.suspected}
                         isProvince={cityCase.isProvince}
+                        isHubei={provinceCase.name == '湖北'}
                       />
                     ))}
                 </View>
