@@ -10,14 +10,11 @@ $colors: (#4169e2 #eb89c8 #28b7a3 #4169e2 #fd8572 #fd8572);
 
   &-text {
     &-prefix {
-      position: relative;
-      top: -6px;
       margin-right: 12px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      height: 32px;
-      line-height: 32px;
+      height: 38px;
       padding: 0 6px;
       color: #fff;
       font-size: 24px;
@@ -51,6 +48,7 @@ $colors: (#4169e2 #eb89c8 #28b7a3 #4169e2 #fd8572 #fd8572);
     &-title {
       color: #333;
       font-size: 32px;
+      line-height: 44px;
       font-weight: 500;
 
       &-container {
