@@ -20,6 +20,7 @@ export default class HomeCard extends Component<IHomeCardProps> {
       isLatest = false,
     } = this.props
     const hasSource = !!source
+    const hasDistrict = !!provinceName
     const precisionTime = dayjs(timestamp).format('M-D H:mm')
 
     return (
@@ -47,9 +48,11 @@ export default class HomeCard extends Component<IHomeCardProps> {
             </View>
             <View className='home-card-text-middle'>{content}</View>
             <View className='home-card-text-bottom-wrapper'>
-              <Text className='home-card-text-bottom-left-content'>
-                所属地区：{provinceName}
-              </Text>
+              {hasDistrict && (
+                <Text className='home-card-text-bottom-left-content'>
+                  所属地区：{provinceName}
+                </Text>
+              )}
               {hasSource && (
                 <Text className='home-card-text-bottom-right-content'>
                   信息来源：{source}
