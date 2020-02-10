@@ -1,83 +1,31 @@
+import dayjs from 'dayjs'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
-import dayjs from 'dayjs'
-import * as api from '../base/api'
 
 import { Title } from '../components/title'
 import { MapCell } from '../components/map-cell'
-import { EcMap } from '../../components/echarts'
 import { SumCard } from '../components/sum-card'
+import { EcMap } from '../../components/echarts'
 
-import { IPneumoniaMapState, IResponseError } from '../../base/interfaces'
+import * as api from '../base/api'
+import { mapDefaultOption } from '../../base/constants'
+import {
+  IResponseError,
+  IPneumoniaMapState,
+  IPneumoniaMapResponse,
+  IPneumoniaMapResponseList,
+} from '../../base/interfaces'
 
 import './app.scss'
 
 const now = dayjs(new Date()).format('YYYY-MM-DD HH:mm')
-const mapData = []
 
-const option = {
-  backgroundColor: '#f8f8f8',
-  tooltip: {
-    trigger: 'item',
-  },
-  visualMap: [
-    {
-      type: 'piecewise',
-      pieces: [
-        { min: 10000, color: '#7f1100' },
-        { min: 1000, max: 9999, color: '#bd1317' },
-        { min: 500, max: 999, color: '#e74a45' },
-        { min: 100, max: 499, color: '#ff8b71' },
-        { min: 10, max: 99, color: '#fdd2a0' },
-        { min: 1, max: 9, color: '#fff3cf' },
-      ],
-      textStyle: {
-        color: '#000',
-        fontSize: 8,
-      },
-      itemGap: 2,
-    },
-  ],
-  series: [
-    {
-      type: 'map',
-      map: 'china',
-      mapType: 'map',
-      zoom: 1.2,
-      label: {
-        normal: {
-          show: true,
-          fontSize: 8,
-          distance: 5,
-        },
-        emphasis: {
-          show: true,
-          textStyle: {
-            color: '#fff',
-            fontSize: 8,
-          },
-        },
-      },
-      itemStyle: {
-        normal: {
-          borderColor: '#a9a9a9',
-          areaColor: '#fff',
-        },
-        emphasis: {
-          areaColor: '#000',
-          borderWidth: 0,
-        },
-      },
-      animation: false,
-      data: mapData,
-    },
-  ],
-}
-
-export default class PneumoniaMap extends Component<IPneumoniaMapState> {
+export default class PneumoniaMap extends Component {
   listFieldName = 'mapList'
 
   fetchMethodFieldName = 'fetchMapList'
+
+  mapOption = JSON.parse(JSON.stringify(mapDefaultOption))
 
   config: Config = {
     navigationBarTitleText: '疫情地图',
@@ -115,17 +63,15 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
   }
 
   fetchMapListCallback() {
-    return (error: IResponseError, list = []) => {
+    return (error: IResponseError, response: IPneumoniaMapResponse) => {
       if (error) return
-      const areaData = list.listByArea
-      areaData.map(provinceItem => {
-        mapData.push({
-          name: provinceItem.provinceShortName,
-          value: provinceItem.confirmed,
-        })
-      })
+
+      const { statistics, listByArea: areaData } = response
+      this.mapOption.series[0].data = areaData.map(
+        ({ provinceShortName: name, confirmed: value }) => ({ name, value }),
+      )
+
       const currentMapList = this.formatMapTable(areaData)
-      const statistics = list.statistics
       const sumData = [
         {
           name: 'confirmed',
@@ -152,7 +98,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
     }
   }
 
-  formatMapTable(list) {
+  formatMapTable(list: IPneumoniaMapResponseList[]) {
     return list.map(
       ({
         cities,
@@ -193,7 +139,7 @@ export default class PneumoniaMap extends Component<IPneumoniaMapState> {
         <Title className='map' title='疫情盘点' />
         <View className='map-body'>
           <View className='map-china'>
-            <EcMap option={option} style='height: 718rpx' />
+            <EcMap option={this.mapOption} style='height: 718rpx' />
           </View>
           <View className='map-data'>
             <View className='map-case-title'>

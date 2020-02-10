@@ -1,3 +1,9 @@
+interface ISummaryData {
+  name: string
+  today: number
+  compared: number
+}
+
 export interface INews {
   title: string
   pubDate: number
@@ -28,16 +34,11 @@ export interface IResponse {
   data?: object | undefined
 }
 
-export interface IAreaProps {
+interface IBasePneumoniaMap {
   dead: number
-  name: string
   cured: number
-  isEven?: boolean
-  isShow?: boolean
   confirmed: number
   suspected: number
-  isActive?: boolean
-  isProvince?: boolean
 }
 
 export interface ITitleProps {
@@ -80,14 +81,46 @@ export interface IRumorCardState {
   isToggled: boolean
 }
 
+export interface IPneumoniaMapResponseStatistics {
+  deadIncr: number
+  deadCount: number
+  curedIncr: number
+  curedCount: number
+  confirmedIncr: number
+  suspectedIncr: number
+  suspectedCount: number
+  confirmedCount: number
+}
+
+export interface IAreaProps extends IBasePneumoniaMap {
+  name: string
+  isShow: boolean
+  isEven?: boolean
+  isActive?: boolean
+  isProvince?: boolean
+}
+
 interface IMapProps extends IAreaProps {
   cities: IAreaProps[]
 }
 
 export interface IPneumoniaMapState {
   mapList: IMapProps[]
-  sumData: []
-  mapData: []
+  sumData: ISummaryData[]
+}
+
+interface IPneumoniaMapResponseCities extends IBasePneumoniaMap {
+  cityName: string
+}
+
+export interface IPneumoniaMapResponseList extends IBasePneumoniaMap {
+  provinceShortName: string
+  cities: IPneumoniaMapResponseCities[]
+}
+
+export interface IPneumoniaMapResponse {
+  listByArea: IPneumoniaMapResponseList[]
+  statistics: IPneumoniaMapResponseStatistics
 }
 
 export interface IGuideCardProps extends IGuide {
