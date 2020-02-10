@@ -95,6 +95,7 @@ export interface IPneumoniaMapResponseStatistics {
 export interface IAreaProps extends IBasePneumoniaMap {
   name: string
   isShow: boolean
+  isHubei: boolean
   isEven?: boolean
   isActive?: boolean
   isProvince?: boolean

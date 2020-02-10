@@ -175,11 +175,12 @@ export default class PneumoniaMap extends Component {
               <Text className='map-case-nav-format map-case-nav-confirmed'>
                 确诊
               </Text>
-              <Text className='map-case-nav-format'>疑似</Text>
+
               <Text className='map-case-nav-format map-case-nav-cured'>
                 治愈
               </Text>
               <Text className='map-case-nav-format'>死亡</Text>
+              <Text className='map-case-nav-format'>病死率</Text>
             </View>
             <View className='map-case-table'>
               {mapList.map((provinceCase, index) => (
@@ -193,6 +194,7 @@ export default class PneumoniaMap extends Component {
                     name={provinceCase.name}
                     cured={provinceCase.cured}
                     isShow={provinceCase.isShow}
+                    isHubei={provinceCase.name == '湖北'}
                     isActive={provinceCase.isActive}
                     confirmed={provinceCase.confirmed}
                     suspected={provinceCase.suspected}
@@ -206,6 +208,7 @@ export default class PneumoniaMap extends Component {
                         name={cityCase.name}
                         cured={cityCase.cured}
                         isShow={cityCase.isShow}
+                        isHubei={provinceCase.name == '湖北'}
                         confirmed={cityCase.confirmed}
                         suspected={cityCase.suspected}
                         isProvince={cityCase.isProvince}
