@@ -9,7 +9,6 @@ class App extends Component {
       'pages/home/app',
       'pages/map/app',
       'pages/rumor/app',
-      'pages/hospital/app',
       'pages/guide/app',
     ],
     window: {
@@ -42,12 +41,6 @@ class App extends Component {
           pagePath: 'pages/rumor/app',
           iconPath: 'asset/img/rumor-icon.png',
           selectedIconPath: 'asset/img/actived-rumor-icon.png',
-        },
-        {
-          text: '定点医院',
-          pagePath: 'pages/hospital/app',
-          iconPath: 'asset/img/hospital-icon.png',
-          selectedIconPath: 'asset/img/actived-hospital-icon.png',
         },
         {
           text: '预防指南',

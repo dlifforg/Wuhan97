@@ -152,9 +152,10 @@ export interface IRumorState extends IBaseListState {
 
 export interface IResponseData extends IOptionalProps {
   error?: any
-  data?: object
   message: string
   code: number | string
+  list: object | undefined
+  data?: object | undefined
   errmsg?: string | undefined
   result?: object | undefined
   status?: number | undefined

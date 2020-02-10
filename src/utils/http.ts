@@ -20,11 +20,13 @@ const success = (response: IResponse) => {
   const {
     status,
     result,
+    list: otherOriginData,
     message: nativeMessage,
     errmsg: mockErrorMessage,
     [dataFieldName]: realData,
   } = data as IResponseData
 
+  if (otherOriginData) return otherOriginData
   if (!status && realData !== null) return realData || result
   if (mockErrorMessage || nativeMessage) throw mockErrorMessage || nativeMessage
 

@@ -4,6 +4,7 @@ import { List } from '../components/list'
 import { BasePage } from '../components/base-page'
 import { HomeCard } from '../components/home-card'
 
+import * as api from '../base/api'
 import { INews, IHomeState } from '../../base/interfaces'
 
 import './app.scss'
@@ -33,6 +34,12 @@ export default class Home extends List {
         provinceName,
       }),
     )
+  }
+
+  fetchFilteredList(filterMap: object, pageNo: number, pageSize = 10) {
+    const query = { pageNo, pageSize, ...filterMap }
+
+    api[this.fetchMethodFieldName](this.fetchListCallback(pageSize), query)
   }
 
   render() {

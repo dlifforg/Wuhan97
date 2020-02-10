@@ -22,3 +22,6 @@ declare const wx: any
 
 // @ts-ignore
 declare const BASE_URL: string
+
+// @ts-ignore
+declare const OTHER_BASE_URL: string

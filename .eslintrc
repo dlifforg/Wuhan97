@@ -46,6 +46,7 @@
   },
   "globals": {
     "wx": true,
-    "BASE_URL": true
+    "BASE_URL": true,
+    "OTHER_BASE_URL": true,
   }
 }

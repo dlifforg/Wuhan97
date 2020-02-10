@@ -67,9 +67,7 @@ const wxFetchWrapper = (method: string, isShowToast = true) => {
   }
 }
 
-export const fetchNewsList = fetchWrapper({ prefix: 'News' })(
-  `${BASE_URL}/index`,
-)
+export const fetchNewsList = fetchWrapper()(`${OTHER_BASE_URL}/timeline`)
 export const fetchGuideList = fetchWrapper({ prefix: 'Care' })(
   `${BASE_URL}/index`,
 )
