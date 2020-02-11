@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   uglify: {
-    enable: true,
+    enable: false,
     config: {},
   },
   defineConstants: {

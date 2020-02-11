@@ -10,11 +10,13 @@ $colors: (#4169e2 #eb89c8 #28b7a3 #4169e2 #fd8572 #fd8572);
 
   &-text {
     &-prefix {
+      position: relative;
+      top: -2px;
       margin-right: 12px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      height: 38px;
+      height: 40px;
       padding: 0 6px;
       color: #fff;
       font-size: 24px;
