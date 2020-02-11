@@ -139,6 +139,10 @@
 
       &-left-content,
       &-right-content {
+        overflow: hidden;
+        max-width: 50%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         font-size: 24px;
       }
     }
