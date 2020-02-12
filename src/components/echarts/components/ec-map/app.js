@@ -1,10 +1,14 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import echarts from 'echarts/lib/echarts'
+
+import 'echarts/lib/chart/map'
+import 'echarts/lib/component/tooltip'
+import 'echarts/lib/component/visualMap'
 
 import { EcCanvas } from '../ec-canvas'
 
 import Tool from '../../../../utils/tool'
-import * as echarts from '../../lib/echarts'
 import geoJson from '../../json/china.geo.json'
 
 import './app.scss'
