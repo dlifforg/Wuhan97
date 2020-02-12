@@ -49,10 +49,10 @@ export default class HomeCard extends Component<IHomeCardProps> {
             <View className='home-card-text-middle'>{content}</View>
             <View className='home-card-text-bottom-wrapper'>
               <Text className='home-card-text-bottom-left-content'>
-                {hasDistrict && `所属地区：${provinceName}`}
+                {hasDistrict ? `所属地区：${provinceName}` : ''}
               </Text>
               <Text className='home-card-text-bottom-right-content'>
-                {hasSource && `信息来源：${source}`}
+                {hasSource ? `信息来源：${source}` : ''}
               </Text>
             </View>
           </View>
